@@ -87,7 +87,24 @@ Joined when revenue was under $10M and helped scale it to $100M+ over three year
 
 ## Certifications
 
-*To come.*
+Pulled from LinkedIn on 2026-11-11, newest first.
+
+| Certification | Issuer | Issued |
+|---|---|---|
+| Mathematics for Machine Learning: Linear Algebra | Imperial College London | Sep 2026 |
+| Using Python to Access Web Data | University of Michigan | Oct 2025 |
+| Python Data Structures | University of Michigan | Sep 2025 |
+| Introduction to Programming Using Python | University of Michigan | Sep 2025 |
+| Generative AI Leader | Google | Sep 2025 |
+| Generative AI: Foundational Concepts | Google | Sep 2025 |
+| Introduction to Generative AI | Google | Sep 2025 |
+| Introduction to Responsible AI | Google | Sep 2025 |
+| Introduction to Large Language Models | Google | Sep 2025 |
+| Career Essentials in Generative AI | Microsoft | Sep 2025 |
+| Ethics in the Age of Generative AI | Project Management Institute | Sep 2025 |
+| Generative AI Certification | NASBA | Sep 2025 |
+| Generative AI: The Evolution of Thoughtful Online Search | LinkedIn | Sep 2025 |
+| Introduction to Artificial Intelligence | LinkedIn | Sep 2025 |
 
 ## Licenses
 
