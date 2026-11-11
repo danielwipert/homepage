@@ -37,7 +37,6 @@ All decisions made on 2026-11-11, one gate at a time.
 ## Open items
 
 - Update LinkedIn's CASDAM description to match: Chorus AI Systems Data Analytics Manager, five stages, about $0.05 and 2 minutes per run.
-
 - Writing vs. "Research & Writing" could blur. If it does, rename the group to "Research."
 - Update cadence and repo link for the Metro Economic Health Report.
 - OpenRouter Weekly's provider-variance experiment: still planned, or dropped?
