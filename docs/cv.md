@@ -108,4 +108,6 @@ Pulled from LinkedIn on 2026-11-11, newest first.
 
 ## Licenses
 
-*To come.*
+| License | Issuer | Details |
+|---|---|---|
+| Professional Educator License (PEL) | Illinois State Board of Education | Full teaching license, Language Arts, grades 9 to 12 |
