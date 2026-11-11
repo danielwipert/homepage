@@ -2,7 +2,7 @@
 
 Dan Wipert's personal homepage: one front door for the projects, the research, and the writing.
 
-**Status:** Planning. No site code yet.
+**Status:** Planning. Spec v1.0 drafted; no site code yet.
 
 ## What this site is
 
@@ -35,5 +35,6 @@ Film, art, and music writing go on a separate site later. This one is AI and wor
 
 ## Docs
 
+- [Site spec](docs/spec.md): every page, the content model, design, SEO, tech, and build phases
 - [Decision log](docs/decisions.md): every choice made so far, and why
 - [Project inventory](docs/projects.md): what goes on the Work page, what's cut, and what's still missing
