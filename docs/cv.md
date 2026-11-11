@@ -83,7 +83,12 @@ Joined when revenue was under $10M and helped scale it to $100M+ over three year
 
 ## Education
 
-*To come.*
+| School | Degree | Notes |
+|---|---|---|
+| Virginia Commonwealth University | MA, English, Literary Theory | Thesis: "Social Criticism and Narration in John Cheever's Short Fiction" |
+| Wake Forest University | BA, English, Secondary Education | Founded the Wake Forest Film Society |
+| New York University | Certificate, Web Development and Design (2011) | HTML, CSS, MySQL, PHP, JavaScript, jQuery, database design |
+| General Assembly NYC | Certificate, Web Development and Design (2011) | HTML5, front-end web development, JavaScript, jQuery, web typography |
 
 ## Certifications
 
@@ -92,6 +97,7 @@ Pulled from LinkedIn on 2026-11-11, newest first.
 | Certification | Issuer | Issued |
 |---|---|---|
 | Mathematics for Machine Learning: Linear Algebra | Imperial College London | Sep 2026 |
+| AI Strategies for Business Transformation (executive program) | Northwestern University, Kellogg School of Management | Nov 2025 |
 | Using Python to Access Web Data | University of Michigan | Oct 2025 |
 | Python Data Structures | University of Michigan | Sep 2025 |
 | Introduction to Programming Using Python | University of Michigan | Sep 2025 |
