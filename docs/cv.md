@@ -12,14 +12,14 @@ AI Operations Management · AI Trust and Safety · Founder, Chorus AI Systems
 
 Chorus AI builds and deploys production AI systems for processes that can't afford to be wrong: financial workflows, compliance, and other environments where being wrong has real consequences. The work is deployment-first: embed with the client, define the failure modes that matter, ship the system, debug in production, and iterate on feedback.
 
-CASDAM (Chorus AI Data Analytics Manager) is the working artifact: a six-stage pipeline that turns heterogeneous source data into auditable executive PDF and dashboard output. Solo-built, deployed end to end, designed to eliminate hallucination risk by architecture, not prompt engineering.
+CASDAM (Chorus AI Systems Data Analytics Manager) is the working artifact: a five-stage pipeline that turns heterogeneous source data into auditable executive PDF and dashboard output. Solo-built, deployed end to end, designed to eliminate hallucination risk by architecture, not prompt engineering.
 
 - Multi-model orchestration across six model families via OpenRouter; generator/verifier pairs structurally different by design to decorrelate failure modes
 - Closed-loop verification: an independent verifier strips any claim that doesn't trace to a FACT_ID; fact list immutable after computation
-- Stage 6 RAG with deterministic citation validation
+- RAG-sourced expert commentary with deterministic citation validation
 - Constitutional constraints enforced as code: no unverified output, mandatory degradation disclosure, governance gates at every stage
 - Control flow lives in code, not the model: a deliberate choice for audit-traceable output
-- About $0.04 per run, about 150 seconds end to end, three-tier PDF render fallback, adversarial test infrastructure
+- About $0.05 per run, about 2 minutes end to end, three-tier PDF render fallback, adversarial test infrastructure
 
 A second system, BRAG, applies the same philosophy to retrieval: built over a decade of Netflix SEC filings, it gates every answer through a Verifier and a Refutation Agent, so responses that don't clear the evidence bar degrade gracefully rather than hallucinate.
 
