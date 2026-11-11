@@ -87,8 +87,6 @@ Joined when revenue was under $10M and helped scale it to $100M+ over three year
 |---|---|---|
 | Virginia Commonwealth University | MA, English, Literary Theory | Thesis: "Social Criticism and Narration in John Cheever's Short Fiction" |
 | Wake Forest University | BA, English, Secondary Education | Founded the Wake Forest Film Society |
-| New York University | Certificate, Web Development and Design (2011) | HTML, CSS, MySQL, PHP, JavaScript, jQuery, database design |
-| General Assembly NYC | Certificate, Web Development and Design (2011) | HTML5, front-end web development, JavaScript, jQuery, web typography |
 
 ## Certifications
 
@@ -111,6 +109,8 @@ Pulled from LinkedIn on 2026-11-11, newest first.
 | Generative AI Certification | NASBA | Sep 2025 |
 | Generative AI: The Evolution of Thoughtful Online Search | LinkedIn | Sep 2025 |
 | Introduction to Artificial Intelligence | LinkedIn | Sep 2025 |
+| Web Development and Design (HTML, CSS, MySQL, PHP, JavaScript, database design) | New York University | 2011 |
+| Web Development and Design (HTML5, front-end development, JavaScript, web typography) | General Assembly NYC | 2011 |
 
 ## Licenses
 
