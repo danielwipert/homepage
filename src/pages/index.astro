@@ -29,9 +29,16 @@ const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 const screen = [
   'C:\\DANIEL&gt; DIR /WORK',
   ...listing.flatMap((b) => [`<span class="dim">${esc(b.label)}</span>`, ...b.lines.map(esc)]),
-  `<span class="dim">${all.length} FILES · ALL SYSTEMS NOMINAL</span>`,
-  'C:\\DANIEL&gt; <span class="cursor"></span>',
+  `<span class="dim">${all.length} FILES · TYPE HELP TO EXPLORE</span>`,
 ].join('\n');
+
+// Data the interactive terminal needs (src/scripts/terminal.ts).
+const termData = {
+  projects: all.map((p) => ({ id: p.id, title: p.data.title, file: p.data.fileName, value: liveValues(p).termValue, summary: p.data.summary })),
+  email: [SITE.emailUser, SITE.emailDomain],
+  linkedin: SITE.linkedin,
+  github: SITE.github,
+};
 
 const depts = [
   { num: '01', name: 'RESEARCH', what: 'Textbook + case library', href: '#research' },
@@ -68,9 +75,21 @@ const site = {
         <div class="sun" aria-hidden="true"><div></div><div></div></div>
         <div class="teal-dot" aria-hidden="true"></div>
         <div class="bezel">
-          <div class="screen crt">
+          <div class="screen crt" id="term" title="Click to type a command">
             <div class="glare" aria-hidden="true"></div>
-            <pre class="glow listing" aria-label="A list of Daniel's projects" set:html={screen}></pre>
+            <div class="listing glow">
+              <pre id="term-out" role="log" aria-live="polite" aria-label="Terminal: a list of Daniel's projects" set:html={screen}></pre>
+              <div class="prompt" aria-hidden="true">C:\DANIEL&gt; <span id="term-typed"></span><span class="cursor"></span></div>
+            </div>
+            <label class="sr-only" for="term-in">Type a terminal command, then press Enter. Try help.</label>
+            <input id="term-in" class="term-in" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" />
+          </div>
+          <div class="keys" role="group" aria-label="Quick commands">
+            <button type="button" data-cmd="help">HELP</button>
+            <button type="button" data-cmd="dir">DIR</button>
+            <button type="button" data-cmd="whoami">WHOAMI</button>
+            <button type="button" data-cmd="live">LIVE</button>
+            <button type="button" data-cmd="contact">CONTACT</button>
           </div>
           <div class="bezel-foot">
             <span class="model">MODEL DW-1966</span>
@@ -148,6 +167,12 @@ const site = {
   </section>
 </Base>
 
+<script type="application/json" id="term-data" set:html={JSON.stringify(termData)}></script>
+<script>
+  import { initTerminal } from '../scripts/terminal';
+  initTerminal();
+</script>
+
 <style>
   .section { padding-top: 88px; padding-bottom: 40px; }
 
@@ -169,8 +194,22 @@ const site = {
   .bezel { position: relative; z-index: 1; background: linear-gradient(165deg, #F4F3EF 0%, #DEDBD3 45%, #BDB8AD 100%); border: 2px solid #14161B; border-radius: 40px; padding: clamp(16px, 3vw, 28px) clamp(16px, 3vw, 28px) 18px; box-shadow: inset 0 3px 0 rgba(255,255,255,.7), inset 0 -6px 0 rgba(0,0,0,.12), 0 30px 50px var(--shadow), 12px 12px 0 #14161B; }
   .screen { container-type: inline-size; border-radius: 28px; padding: clamp(16px, 3vw, 28px) clamp(14px, 3vw, 30px); background: radial-gradient(ellipse at 50% 45%, #1C222B 0%, #0D1014 70%, #06080A 100%); box-shadow: inset 0 0 50px rgba(0,0,0,.85), inset 0 0 0 6px #0B0D10, 0 0 0 3px #8C8A84; }
   .glare { position: absolute; left: 6%; top: 5%; width: 55%; height: 32%; border-radius: 50%; background: radial-gradient(ellipse at 30% 30%, rgba(255,255,255,.10), transparent 70%); z-index: 2; }
-  .listing { position: relative; z-index: 1; margin: 0; font-family: var(--font-crt); font-size: min(22px, 4.5cqi); line-height: 1.3; color: var(--phosphor); white-space: pre; overflow: hidden; }
-  .listing .dim { opacity: .6; }
+  .screen { cursor: text; }
+  .screen:focus-within { box-shadow: inset 0 0 50px rgba(0,0,0,.85), inset 0 0 0 6px #0B0D10, 0 0 0 3px var(--phosphor), 0 0 24px rgba(255,176,0,.35); }
+  .listing { position: relative; z-index: 1; margin: 0; font-family: var(--font-crt); font-size: min(22px, 4.5cqi); line-height: 1.3; color: var(--phosphor); height: calc(16 * 1.3em); overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
+  .listing::-webkit-scrollbar { display: none; }
+  .listing pre { margin: 0; font: inherit; white-space: pre-wrap; word-break: break-word; }
+  .listing :global(.dim) { opacity: .6; }
+  .listing :global(.err) { color: #FF8A52; }
+  .listing :global(.hi) { color: #FFF1C2; }
+  .prompt { white-space: pre-wrap; word-break: break-word; }
+  .term-in { position: absolute; left: 0; bottom: 0; width: 1px; height: 1px; opacity: 0; border: 0; padding: 0; font-size: 16px; }
+  .screen.booting { animation: flicker .9s steps(2) 1; }
+  @keyframes flicker { 0% { filter: brightness(2.2) contrast(1.4); } 30% { filter: brightness(.4); } 60% { filter: brightness(1.6); } 100% { filter: none; } }
+  .keys { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .keys button { flex: 1 1 auto; min-height: 40px; padding: 0 12px; font-family: var(--font-mono); font-weight: 600; font-size: 11px; letter-spacing: 2px; color: #14161B; background: linear-gradient(#FBFAF7, #DAD7CF); border: 2px solid #14161B; border-radius: 8px; box-shadow: inset 0 2px 0 rgba(255,255,255,.8), inset 0 -4px 0 #B9B5AB, 0 3px 0 #14161B; cursor: pointer; }
+  .keys button:active { transform: translateY(2px); box-shadow: inset 0 2px 0 rgba(255,255,255,.8), inset 0 -2px 0 #B9B5AB, 0 1px 0 #14161B; }
+  .keys button:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
   .bezel-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; gap: 12px; }
   .model { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 3px; color: #14161B; }
   .grille { display: flex; flex-direction: column; gap: 4px; }
