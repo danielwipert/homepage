@@ -27,4 +27,19 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { projects };
+// One Markdown file per piece of writing. Imported posts start unpublished.
+const posts = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/posts' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    topics: z.array(z.string()).default([]), // slugs from src/data/topics.ts
+    excerpt: z.string(),
+    featured: z.number().int().min(1).max(6).optional(), // position on the Start Here shelf
+    source: z.enum(['linkedin-post', 'linkedin-article', 'original']),
+    sourceUrl: z.string().url().optional(),
+    published: z.boolean().default(false),
+  }),
+});
+
+export const collections = { projects, posts };

@@ -1,0 +1,29 @@
+---
+import type { Post } from '../lib/posts';
+import { fmtDate } from '../lib/posts';
+import { topicName } from '../data/topics';
+interface Props { post: Post; }
+const { post } = Astro.props;
+---
+<li class="prow">
+  <span class="pdate mono">{fmtDate(post.data.date).toUpperCase()}</span>
+  <div class="pmain">
+    <a href={`/writing/${post.id}/`} class="ptitle">{post.data.title}</a>
+    <p class="pex">{post.data.excerpt}</p>
+    {post.data.topics.length > 0 && (
+      <div class="ptags">{post.data.topics.map((t) => <a href={`/writing/topics/${t}/`} class="mono">{topicName(t).toUpperCase()}</a>)}</div>
+    )}
+  </div>
+</li>
+
+<style>
+  .prow { display: flex; flex-wrap: wrap; gap: 6px 28px; padding: 20px 0; border-bottom: 1px solid var(--shadow); }
+  .pdate { flex: 0 0 120px; font-size: 12px; color: var(--muted); padding-top: 6px; }
+  .pmain { flex: 1 1 320px; min-width: 0; }
+  .ptitle { font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.25; color: var(--ink); text-decoration: none; }
+  .ptitle:hover { color: var(--orange-text); }
+  .pex { margin: 6px 0 0; font-size: 17px; color: var(--muted); }
+  .ptags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .ptags a { font-size: 11px; letter-spacing: 2px; padding: 4px 10px; border: 1.5px solid var(--ink); border-radius: 999px; color: var(--ink); text-decoration: none; }
+  .ptags a:hover { background: var(--ink); color: var(--bg); }
+</style>

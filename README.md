@@ -58,4 +58,14 @@ Cloudflare Pages builds the site on every push to `main` (build command `npm run
 | A project's text, numbers, links | `src/content/projects/<project>.md` |
 | The CV (About page and PDF) | `src/data/cv.ts`, then re-run `scripts/make_assets.cjs` |
 | Name, intro line, email, social links | `src/site.ts` |
+| A piece of writing | `src/content/posts/<post>.md` (set `published: true` to show it; `featured: 1` to 6 puts it on the Start Here shelf) |
+| Writing topics | `src/data/topics.ts` |
 | Colors and fonts | `src/styles/global.css` (top of the file) |
+
+## Importing LinkedIn writing
+
+```bash
+python3 scripts/import_linkedin.py path/to/LinkedIn_export.zip
+```
+
+Every post and article becomes a Markdown file in `src/content/posts/`, unpublished. A review list is written to `scripts/import_review.csv`.

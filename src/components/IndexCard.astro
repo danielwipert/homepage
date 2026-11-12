@@ -1,0 +1,27 @@
+---
+// Library index card used for featured writing ("Start here").
+import type { Post } from '../lib/posts';
+import { topicName } from '../data/topics';
+interface Props { post: Post; n: number; }
+const { post, n } = Astro.props;
+const tilts = ['-1deg', '0.6deg', '-0.4deg', '0.8deg', '-0.7deg', '0.3deg'];
+const topic = post.data.topics[0];
+---
+<a href={`/writing/${post.id}/`} class="icard lift" style={`transform: rotate(${tilts[(n - 1) % tilts.length]});`}>
+  <div class="ilabel">START HERE {String(n).padStart(2, '0')}{topic ? ` · ${topicName(topic).toUpperCase()}` : ''}</div>
+  <div class="ilines">
+    <h3>{post.data.title}</h3>
+    <p>{post.data.excerpt}</p>
+  </div>
+  <span class="ihole" aria-hidden="true"></span>
+</a>
+
+<style>
+  .icard { position: relative; display: block; text-decoration: none; color: #14161B; background: #FFFFFF; border: 2px solid #14161B; border-radius: 4px; padding: 22px 24px 60px; box-shadow: 6px 6px 0 #14161B, 0 22px 34px rgba(0,0,0,.25); }
+  .icard:hover { color: #14161B; }
+  .ilabel { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; padding-bottom: 10px; border-bottom: 2px solid #C2410C; }
+  .ilines { background: repeating-linear-gradient(to bottom, transparent 0 31px, #9DB8D6 31px 32px); padding-top: 6px; }
+  h3 { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 24px; line-height: 32px; }
+  p { margin: 0; font-size: 17px; line-height: 32px; font-style: italic; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .ihole { position: absolute; left: 50%; bottom: 18px; width: 22px; height: 22px; margin-left: -11px; border-radius: 50%; background: #14161B; box-shadow: inset 0 3px 4px rgba(0,0,0,.8); }
+</style>

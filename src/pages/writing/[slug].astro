@@ -1,0 +1,66 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PostRow from '../../components/PostRow.astro';
+import { getPosts, fmtDate, readingMinutes } from '../../lib/posts';
+import { topicName } from '../../data/topics';
+import { SITE } from '../../site';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post, all: posts } }));
+}
+
+const { post, all } = Astro.props;
+const d = post.data;
+const { Content } = await render(post);
+const related = all
+  .filter((p) => p.id !== post.id && p.data.topics.some((t) => d.topics.includes(t)))
+  .slice(0, 2);
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: d.title,
+  description: d.excerpt,
+  datePublished: d.date.toISOString().slice(0, 10),
+  author: { '@type': 'Person', name: SITE.name, url: SITE.url },
+  url: new URL(`/writing/${post.id}/`, SITE.url).href,
+  ...(d.sourceUrl ? { isBasedOn: d.sourceUrl } : {}),
+};
+---
+<Base title={d.title} description={d.excerpt} jsonLd={ld} current="writing">
+  <article class="wrap post" data-pagefind-body>
+    <a href="/writing/" class="crumb mono" data-pagefind-ignore>← THE LIBRARY</a>
+    <header>
+      <p class="meta mono" data-pagefind-ignore>
+        {fmtDate(d.date).toUpperCase()} · {readingMinutes(post.body)} MIN READ
+        {d.topics.map((t) => <> · <a href={`/writing/topics/${t}/`}>{topicName(t).toUpperCase()}</a></>)}
+      </p>
+      <h1>{d.title}</h1>
+    </header>
+    <div class="prose"><Content /></div>
+    {d.sourceUrl && (
+      <p class="orig mono" data-pagefind-ignore>ORIGINALLY POSTED ON <a href={d.sourceUrl}>LINKEDIN →</a></p>
+    )}
+  </article>
+
+  {related.length > 0 && (
+    <section class="wrap" style="padding-bottom: 96px;">
+      <h2 class="mono" style="font-size: 13px; letter-spacing: 3px; color: var(--muted); font-weight: 500;">KEEP READING</h2>
+      <ul style="list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); max-width: 860px;">
+        {related.map((p) => <PostRow post={p} />)}
+      </ul>
+    </section>
+  )}
+</Base>
+
+<style>
+  .post { padding-top: 56px; padding-bottom: 64px; }
+  .crumb { display: inline-block; font-size: 12px; letter-spacing: 2px; color: var(--muted); text-decoration: none; margin-bottom: 28px; }
+  .crumb:hover { color: var(--orange-text); }
+  .meta { margin: 0; font-size: 12px; letter-spacing: 2px; color: var(--muted); }
+  .meta a { color: inherit; }
+  h1 { margin: 16px 0 36px; max-width: 22ch; font-weight: 800; font-size: clamp(36px, 5.4vw, 68px); line-height: 1.02; letter-spacing: -1.5px; }
+  .orig { margin-top: 40px; font-size: 12px; letter-spacing: 2px; color: var(--muted); }
+</style>

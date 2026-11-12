@@ -1,0 +1,26 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PostRow from '../../../components/PostRow.astro';
+import { getPosts } from '../../../lib/posts';
+import { TOPICS } from '../../../data/topics';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return Object.entries(TOPICS)
+    .map(([slug, t]) => ({ params: { topic: slug }, props: { t, list: posts.filter((p) => p.data.topics.includes(slug)) } }))
+    .filter((x) => x.props.list.length > 0);
+}
+
+const { t, list } = Astro.props;
+---
+<Base title={`${t.name} · Writing`} description={`Daniel Wipert on ${t.name.toLowerCase()}: ${t.blurb}`} current="writing">
+  <section class="wrap" style="padding-top: 56px; padding-bottom: 110px;">
+    <a href="/writing/" class="mono" style="display: inline-block; font-size: 12px; letter-spacing: 2px; color: var(--muted); text-decoration: none; margin-bottom: 24px;">← THE LIBRARY</a>
+    <p class="mono" style="margin: 0; font-size: 13px; letter-spacing: 3px; color: var(--muted);">TOPIC · {list.length} {list.length === 1 ? 'PIECE' : 'PIECES'}</p>
+    <h1 style="margin: 12px 0 0; font-weight: 800; font-size: clamp(40px, 6vw, 80px); line-height: .98; letter-spacing: -2px;">{t.name}</h1>
+    <p style="margin: 16px 0 40px; max-width: 54ch; font-size: 21px; color: var(--muted);">{t.blurb}</p>
+    <ul style="list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink);">
+      {list.map((p) => <PostRow post={p} />)}
+    </ul>
+  </section>
+</Base>
