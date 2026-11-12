@@ -9,11 +9,12 @@ interface Props {
   noindex?: boolean;
   current?: 'work' | 'writing' | 'about';
   bare?: boolean;          // no header/footer (print pages)
+  ogImage?: string;        // share-card path, e.g. /og/work/brag.png
 }
-const { title, description, jsonLd, noindex = false, current, bare = false } = Astro.props;
+const { title, description, jsonLd, noindex = false, current, bare = false, ogImage: ogPath } = Astro.props;
 const fullTitle = title ? `${title} · ${SITE.name}` : SITE.title;
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
-const ogImage = new URL('/og.png', SITE.url).href;
+const ogImage = new URL(ogPath ?? '/og.png', SITE.url).href;
 
 const person = {
   '@context': 'https://schema.org',

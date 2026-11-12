@@ -31,7 +31,7 @@ const ld = {
   ...(p.siteUrl ? { sameAs: [p.siteUrl, ...(p.repoUrl ? [p.repoUrl] : [])] } : {}),
 };
 ---
-<Base title={p.title} description={p.summary} jsonLd={ld} current="work">
+<Base title={p.title} description={p.summary} jsonLd={ld} current="work" ogImage={`/og/work/${project.id}.png`}>
   <article>
     <header class="ph halftone">
       <div class="wrap ph-inner">

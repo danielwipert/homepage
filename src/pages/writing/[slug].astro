@@ -29,7 +29,7 @@ const ld = {
   ...(d.sourceUrl ? { isBasedOn: d.sourceUrl } : {}),
 };
 ---
-<Base title={d.title} description={d.excerpt} jsonLd={ld} current="writing">
+<Base title={d.title} description={d.excerpt} jsonLd={ld} current="writing" ogImage={`/og/writing/${post.id}.png`}>
   <article class="wrap post" data-pagefind-body>
     <a href="/writing/" class="crumb mono" data-pagefind-ignore>← THE LIBRARY</a>
     <header>
