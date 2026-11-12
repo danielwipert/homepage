@@ -1,0 +1,164 @@
+---
+// Animated "how it works" diagram. Stages light up in order when scrolled into view.
+// Without JavaScript, or with reduced motion, it simply shows fully lit.
+import type { Diagram, Kind, Node } from '../data/diagrams';
+interface Props { d: Diagram; siteUrl?: string; }
+const { d, siteUrl } = Astro.props;
+
+const TAG: Record<Kind, string> = { io: 'IN / OUT', code: 'CODE', model: 'AI MODEL', check: 'CHECKPOINT', step: 'STEP' };
+const used = new Set<Kind>();
+d.stages.forEach((s) => (s.node ? [s.node] : s.parallel!.nodes).forEach((x) => used.add(x.kind)));
+const legend = (['io', 'step', 'code', 'model', 'check'] as Kind[]).filter((k) => used.has(k));
+const last = d.stages.length - 1;
+const tagFor = (x: Node, i: number) => (x.kind === 'io' ? (i === 0 ? 'IN' : i === last ? 'OUT' : 'IN / OUT') : TAG[x.kind]);
+---
+<figure class="diagram" data-diagram>
+  <figcaption class="dhead">
+    <div>
+      <p class="dkick mono">HOW IT WORKS</p>
+      <p class="dtitle">{d.title}</p>
+    </div>
+    <ul class="legend mono" aria-label="Key">
+      {legend.map((k) => <li><span class:list={['sw', k]}></span>{TAG[k]}</li>)}
+    </ul>
+  </figcaption>
+
+  <ol class="flow" style={`--n: ${d.stages.length}`}>
+    {d.stages.map((s, i) => (
+      <li class="stage" style={`--i: ${i}`}>
+        {s.node && (
+          <div class:list={['nd', s.node.kind]}>
+            <span class="tag mono">{tagFor(s.node, i)}</span>
+            <span class="lbl">{s.node.label}</span>
+            {s.node.sub && <span class="sub">{s.node.sub}</span>}
+          </div>
+        )}
+        {s.parallel && (
+          <div class="par">
+            <span class="plabel mono">{s.parallel.label.toUpperCase()}</span>
+            {s.parallel.nodes.map((x) => (
+              <div class:list={['nd', 'small', x.kind]}>
+                <span class="tag mono">{TAG[x.kind]}</span>
+                <span class="lbl">{x.label}</span>
+                {x.sub && <span class="sub">{x.sub}</span>}
+              </div>
+            ))}
+          </div>
+        )}
+        {s.node?.fail && <p class="fail mono"><span aria-hidden="true">↳ </span>{s.node.fail}</p>}
+      </li>
+    ))}
+  </ol>
+
+  {d.loop && (
+    <div class="loopback" aria-label={`Loop: ${d.loop}`}>
+      <span class="larc" aria-hidden="true"></span>
+      <span class="ltext mono">↺ {d.loop.toUpperCase()}</span>
+    </div>
+  )}
+
+  <p class="dnote">
+    {d.note && <span>{d.note} </span>}
+    <span class="simp">Simplified.{siteUrl && <> The full story is on <a href={siteUrl}>the project site</a>.</>}</span>
+  </p>
+</figure>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLElement>('[data-diagram]').forEach((fig) => {
+    if (reduce || !('IntersectionObserver' in window)) return;
+    fig.classList.add('anim');
+    const stages = fig.querySelectorAll<HTMLElement>('.stage');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        stages.forEach((s, i) => setTimeout(() => s.classList.add('lit'), 250 + i * 420));
+        setTimeout(() => fig.classList.add('done'), 250 + stages.length * 420);
+        io.disconnect();
+      });
+    }, { threshold: 0.3 });
+    io.observe(fig);
+  });
+</script>
+
+<style>
+  .diagram { margin: 0; padding: clamp(20px, 3vw, 36px); background: var(--surface); border: 2px solid var(--ink); border-radius: 26px; box-shadow: inset 0 2px 0 rgba(255,255,255,.5), 8px 8px 0 var(--ink), 0 26px 44px var(--shadow); }
+  .dhead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 32px; margin-bottom: 32px; }
+  .dkick { margin: 0; font-size: 12px; letter-spacing: 3px; color: var(--orange-text); }
+  .dtitle { margin: 6px 0 0; font-family: var(--font-display); font-weight: 800; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.1; letter-spacing: -0.5px; max-width: 28ch; }
+  .legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 11px; letter-spacing: 1.5px; color: var(--muted); }
+  .legend li { display: inline-flex; align-items: center; gap: 7px; }
+  .sw { width: 14px; height: 14px; border-radius: 4px; border: 2px solid var(--ink); }
+
+  /* kind colors */
+  .sw.io, .nd.io { --k: #F5F3EE; --kt: #14161B; }
+  .sw.step, .nd.step { --k: var(--mustard); --kt: #14161B; }
+  .sw.code, .nd.code { --k: var(--teal); --kt: #FFFFFF; }
+  .sw.model, .nd.model { --k: #4A2A85; --kt: #F4EEFF; }
+  .sw.check, .nd.check { --k: var(--orange); --kt: #14161B; }
+  .sw { background: var(--k); }
+
+  .flow { list-style: none; margin: 0; padding: 0; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 30px; align-items: start; }
+  .stage { position: relative; display: flex; flex-direction: column; gap: 8px; transition: opacity .5s ease, filter .5s ease, transform .5s ease; }
+  /* connector into this stage */
+  .stage + .stage::before {
+    content: ""; position: absolute; left: -30px; width: 30px; top: 54px; height: 4px; margin-top: -2px;
+    background: var(--ink); opacity: .25; border-radius: 2px; transition: opacity .4s ease;
+  }
+  .stage + .stage::after {
+    content: ""; position: absolute; left: -9px; top: 54px; margin-top: -6px;
+    border-left: 8px solid var(--ink); border-top: 6px solid transparent; border-bottom: 6px solid transparent; opacity: .35;
+  }
+
+  .nd { position: relative; display: flex; flex-direction: column; gap: 4px; background: var(--surface); color: var(--ink); border: 2px solid var(--ink); border-radius: 12px; padding: 30px 12px 12px; box-shadow: 4px 4px 0 var(--ink); overflow: hidden; min-height: 108px; }
+  .nd .tag { position: absolute; left: 0; right: 0; top: 0; padding: 4px 10px; font-size: 9.5px; letter-spacing: 1.5px; background: var(--k); color: var(--kt); border-bottom: 2px solid var(--ink); }
+  .nd .lbl { font-family: var(--font-display); font-weight: 800; font-size: 16px; line-height: 1.15; }
+  .nd .sub { font-size: 14px; line-height: 1.3; color: var(--muted); }
+  .nd.small { min-height: 0; padding-top: 26px; }
+  .nd.small .lbl { font-size: 15px; }
+  .nd.io { background: color-mix(in srgb, var(--surface) 80%, #F2B33D 20%); }
+
+  .par { display: flex; flex-direction: column; gap: 8px; padding: 10px; border: 2px dashed color-mix(in srgb, var(--ink) 40%, transparent); border-radius: 14px; }
+  .plabel { font-size: 9.5px; letter-spacing: 1.5px; color: var(--muted); }
+
+  .fail { margin: 0; font-size: 11px; line-height: 1.35; letter-spacing: .5px; color: var(--orange-text); }
+
+  .loopback { position: relative; margin-top: 18px; padding-top: 22px; text-align: center; }
+  .larc { position: absolute; left: 8%; right: 8%; top: 0; height: 22px; border: 3px solid var(--ink); border-top: none; border-radius: 0 0 22px 22px; opacity: .3; transition: opacity .5s ease, border-color .5s ease; }
+  .ltext { display: inline-block; margin-top: 8px; font-size: 11px; letter-spacing: 2px; color: var(--muted); }
+
+  .dnote { margin: 26px 0 0; font-size: 16px; color: var(--muted); }
+  .simp { font-style: italic; }
+
+  /* ---- animation: dim until lit ---- */
+  .anim .stage { opacity: .22; filter: grayscale(1); transform: translateY(6px); }
+  .anim .stage.lit { opacity: 1; filter: none; transform: none; }
+  .stage.lit + .stage.lit::before, :global(.diagram:not(.anim)) .stage + .stage::before {
+    opacity: 1; background: repeating-linear-gradient(90deg, var(--phosphor) 0 10px, transparent 10px 16px); background-size: 16px 100%;
+    box-shadow: 0 0 10px rgba(255,176,0,.6); animation: flow-x .7s linear infinite;
+  }
+  .stage.lit + .stage.lit::after { opacity: 1; border-left-color: var(--phosphor); }
+  .stage.lit .nd { box-shadow: 4px 4px 0 var(--ink), 0 0 0 3px color-mix(in srgb, var(--phosphor) 0%, transparent); }
+  .anim .stage.lit .nd { animation: pop .6s ease; }
+  .done .larc, .diagram:not(.anim) .larc { opacity: 1; border-color: var(--phosphor); box-shadow: 0 6px 12px -6px rgba(255,176,0,.6); }
+  @keyframes flow-x { to { background-position: 16px 0; } }
+  @keyframes flow-y { to { background-position: 0 16px; } }
+  @keyframes pop { 0% { box-shadow: 4px 4px 0 var(--ink), 0 0 0 0 rgba(255,176,0,.7); } 100% { box-shadow: 4px 4px 0 var(--ink), 0 0 0 14px rgba(255,176,0,0); } }
+
+  /* ---- phones and narrow screens: top to bottom ---- */
+  @media (max-width: 900px) {
+    .flow { grid-auto-flow: row; grid-auto-columns: auto; gap: 34px; max-width: 460px; margin: 0 auto; }
+    .stage + .stage::before { left: 50%; top: -34px; width: 4px; height: 34px; margin: 0 0 0 -2px; }
+    .stage + .stage::after { left: 50%; top: -10px; margin: 0 0 0 -6px; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid var(--ink); border-bottom: none; }
+    .stage.lit + .stage.lit::before, :global(.diagram:not(.anim)) .stage + .stage::before { background: repeating-linear-gradient(180deg, var(--phosphor) 0 10px, transparent 10px 16px); background-size: 100% 16px; animation-name: flow-y; }
+    .stage.lit + .stage.lit::after { border-top-color: var(--phosphor); border-left-color: transparent; }
+    .nd { min-height: 0; }
+    .par { flex-direction: column; }
+    .larc { left: auto; right: -6px; top: -100%; }
+    .loopback { padding-top: 6px; }
+    .larc { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .stage + .stage::before { animation: none !important; }
+  }
+</style>

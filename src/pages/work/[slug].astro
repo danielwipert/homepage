@@ -3,6 +3,8 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { GROUPS, SITE } from '../../site';
 import { liveValues, thisWeek } from '../../lib/live';
+import PipelineDiagram from '../../components/PipelineDiagram.astro';
+import { DIAGRAMS } from '../../data/diagrams';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects', ({ data }) => data.published);
@@ -15,6 +17,7 @@ const { Content } = await render(project);
 const group = GROUPS[p.group];
 const v = liveValues(project);
 const week = thisWeek(project.id);
+const diagram = DIAGRAMS[project.id];
 const all = await getCollection('projects', ({ data }) => data.published);
 const related = p.related.map((id) => all.find((x) => x.id === id)).filter(Boolean);
 
@@ -53,6 +56,12 @@ const ld = {
         </div>
       </div>
     </header>
+
+    {diagram && (
+      <section class="wrap" style="padding-top: 56px;">
+        <PipelineDiagram d={diagram} siteUrl={p.siteUrl} />
+      </section>
+    )}
 
     <div class="wrap body">
       <div class="prose">
