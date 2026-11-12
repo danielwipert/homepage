@@ -20,5 +20,3 @@ termValue: 73% OPEN
 A weekly dashboard of where AI usage is actually going on OpenRouter: token share by lab, by country, by model family, open vs. closed weights, price tier, and task. It's built on a hand-checked registry of models, with a source behind every label.
 
 It updates every Monday, shows a rolling 52 weeks, and publishes its data as CSVs under a CC BY 4.0 license, free to reuse with credit.
-
-**Lately:** open-weight models carry about 73% of tokens, and DeepSeek leads the labs at 39%.

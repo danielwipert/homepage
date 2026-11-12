@@ -59,6 +59,13 @@ All decisions made on 2026-11-11, one gate at a time.
 | 36 | Light theme by default, dark theme follows the visitor's device | Spec 8.2 | `global.css` |
 | 37 | Writing shows a "moving in" page until the LinkedIn import (Phase 2) | No placeholder titles on a live site | `/writing/` |
 
+## Phase 2 and 3 (2026-11-12)
+
+| # | Decision | Why | Where it lives |
+|---|---|---|---|
+| 38 | Writing library built ahead of the LinkedIn export: importer, Start Here shelf, search (Pagefind), topic pages, year archive, RSS | Ready the moment the export arrives | `scripts/import_linkedin.py`, `src/pages/writing/` |
+| 39 | Live numbers: a GitHub Action reads both trackers every Monday and commits `src/data/live.json`; the commit triggers a Cloudflare rebuild | JSON-in-repo, auditable, keeps last week's numbers if a source fails | `.github/workflows/refresh-live.yml`, `scripts/refresh_live.py` |
+
 ## Open items
 
 - Update LinkedIn's CASDAM description to match: Chorus AI Systems Data Analytics Manager, five stages, about $0.05 and 2 minutes per run.

@@ -1,0 +1,34 @@
+# Every Monday, after both trackers have run, pull their latest numbers into
+# src/data/live.json and commit. The commit triggers Cloudflare to rebuild the site.
+name: Refresh live numbers
+
+on:
+  schedule:
+    - cron: "17 15 * * 1"   # Mondays 15:17 UTC (9:17 or 10:17 Chicago time)
+  workflow_dispatch: {}      # lets you run it by hand from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get the trackers' latest data
+        run: |
+          git clone --depth 1 https://github.com/danielwipert/openrouter.chart ../openrouter.chart
+          git clone --depth 1 https://github.com/danielwipert/city.economic.health ../city.economic.health
+
+      - name: Update live.json
+        run: python3 scripts/refresh_live.py ../openrouter.chart ../city.economic.health
+
+      - name: Commit if anything changed
+        run: |
+          if git diff --quiet; then echo "No change this week"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/live.json
+          git commit -m "Weekly live numbers"
+          git push

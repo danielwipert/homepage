@@ -20,4 +20,4 @@ A weekly report card for the 50 largest U.S. metros. Each one is graded 0 to 100
 
 A labor signal (Strong, Growing, Squeeze, or Weak) checks whether job growth reflects real demand or just a shrinking workforce.
 
-**Lately:** Salt Lake City ranks first. Louisville, Chicago, and Detroit sit at the bottom. Full rankings, the method, and a PDF report are on the site.
+Full rankings, the method, and a PDF report are on the site.

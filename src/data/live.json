@@ -1,0 +1,27 @@
+{
+  "openrouter": {
+    "dataWeek": "2026-W45",
+    "weekLabel": "2026-W45",
+    "openShare": 0.7595,
+    "topLab": {
+      "name": "DeepSeek",
+      "share": 0.4068
+    }
+  },
+  "metro": {
+    "asOf": "2026-11-11",
+    "count": 50,
+    "top": {
+      "city": "Salt Lake City",
+      "short": "SLC",
+      "score": 78,
+      "grade": "A+"
+    },
+    "bottom": [
+      "Louisville",
+      "Chicago",
+      "Detroit"
+    ]
+  },
+  "refreshedAt": "2026-11-12T21:57Z"
+}

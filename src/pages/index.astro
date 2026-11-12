@@ -8,6 +8,7 @@ import ResearchPanels from '../components/ResearchPanels.astro';
 import { SITE } from '../site';
 import IndexCard from '../components/IndexCard.astro';
 import { getPosts, featured } from '../lib/posts';
+import { liveValues } from '../lib/live';
 
 const posts = await getPosts();
 const picks = featured(posts);
@@ -22,7 +23,7 @@ const library = research.find((p) => p.id === 'ai-case-study-library')!;
 // The terminal file listing, built from the project files.
 const W = 32;
 const row = (name: string, val: string) => `  ${name} ${'.'.repeat(Math.max(2, W - name.length - val.length - 2))} ${val}`;
-const block = (label: string, items: typeof all) => ({ label, lines: items.map((p) => row(p.data.fileName, p.data.termValue)) });
+const block = (label: string, items: typeof all) => ({ label, lines: items.map((p) => row(p.data.fileName, liveValues(p).termValue)) });
 const listing = [block('[RESEARCH]', research), block('[CHORUS AI SYSTEMS]', chorus), block('[WEEKLY TRACKERS]', trackers)];
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const screen = [

@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { GROUPS, SITE } from '../../site';
+import { liveValues, thisWeek } from '../../lib/live';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects', ({ data }) => data.published);
@@ -12,6 +13,8 @@ const { project } = Astro.props;
 const p = project.data;
 const { Content } = await render(project);
 const group = GROUPS[p.group];
+const v = liveValues(project);
+const week = thisWeek(project.id);
 const all = await getCollection('projects', ({ data }) => data.published);
 const related = p.related.map((id) => all.find((x) => x.id === id)).filter(Boolean);
 
@@ -44,15 +47,23 @@ const ld = {
             {p.repoUrl && <a href={p.repoUrl} class="btn btn-plain">VIEW THE CODE</a>}
           </div>
           <div class="screen-violet crt soft stat">
-            <div class="v-num glowp">{p.stat}</div>
-            <div class="v-label">{p.statLabel}</div>
+            <div class="v-num glowp">{v.stat}</div>
+            <div class="v-label">{v.statLabel}</div>
           </div>
         </div>
       </div>
     </header>
 
     <div class="wrap body">
-      <div class="prose"><Content /></div>
+      <div class="prose">
+        <Content />
+        {week && (
+          <div class="crt weekbox">
+            <pre class="glow">{`C:\\DANIEL> THIS-WEEK\n${week.join('\n')}`}</pre>
+            <p class="mono weeknote">UPDATES EVERY MONDAY</p>
+          </div>
+        )}
+      </div>
       <aside class="side">
         <div class="card">
           <h2 class="mono">STACK</h2>
@@ -82,6 +93,9 @@ const ld = {
   .btns { display: flex; flex-wrap: wrap; gap: 14px; }
   .stat { min-width: 220px; box-shadow: 6px 6px 0 var(--ink); }
   .stat .v-num { font-size: 36px; }
+  .weekbox { margin-top: 36px; border-radius: 18px; padding: 22px 24px; background: radial-gradient(ellipse at 50% 40%, #1C222B, #07090C); border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); }
+  .weekbox pre { position: relative; z-index: 1; margin: 0; font-family: var(--font-crt); font-size: clamp(15px, 2.6vw, 22px); line-height: 1.35; color: var(--phosphor); white-space: pre-wrap; }
+  .weeknote { position: relative; z-index: 1; margin: 12px 0 0; font-size: 11px; letter-spacing: 2px; color: #A7ADB8; }
   .body { display: flex; flex-wrap: wrap; gap: 48px 72px; padding-top: 24px; padding-bottom: 96px; align-items: flex-start; }
   .body .prose { flex: 1 1 560px; min-width: 0; }
   .side { flex: 0 1 300px; min-width: 240px; display: grid; gap: 20px; padding-top: 56px; position: sticky; top: 24px; }
