@@ -25,7 +25,7 @@ All decisions made on 2026-11-11, one gate at a time.
 | 12 | Main projects get full case studies; Minor projects get short pages | Best work gets the spotlight; Phase 1 stays doable | Project pages |
 | 13 | About: my story, a compact timeline, a small PDF CV link | Human, not salesy | About page |
 | 14 | danielwipert.com is the hub. Each Main project gets a short case study here that links out to its full site | Front door to everything; the deep work keeps its own home | Work page |
-| 15 | Main projects split into two groups: "Research & Writing" and "Chorus AI Systems" | Two clear sides of my work | Work page |
+| 15 | Main projects split into two groups: "Research" (renamed from "Research & Writing" in #23) and "Chorus AI Systems" | Two clear sides of my work | Work page |
 | 16 | The textbook and Case Study Library stand alone, with no Chorus label | They're their own thing | Project cards |
 | 17 | Earnings Call Dossier appears inside the CASDAM case study | Proves the pattern works twice | CASDAM page |
 | 18 | Jev vs. the Frontier promoted to Main | Hard numbers; shows I can measure, not just build | Work page |
@@ -34,9 +34,22 @@ All decisions made on 2026-11-11, one gate at a time.
 | 21 | Cut: n8n automations, task manager, political forecasting, Prairie Community Bank case study, Leucothea Consulting | Not part of this site's story | Project inventory |
 | 22 | This repo is `danielwipert/homepage` | Houses the plan, decisions, and site code | GitHub |
 
+## Spec questions (2026-11-12)
+
+| # | Decision | Why | Where it lives |
+|---|---|---|---|
+| 23 | The textbook and Case Study Library group is called "Research" | Avoids a clash with the Writing tab | Work page, Home |
+| 24 | Small headshot on About only | A face where people look for one; Home stays about the work | About |
+| 25 | Contact: LinkedIn plus a contact email | Easy for recruiters and readers | About, footer |
+| 26 | Claude drafts the About story; Dan rewrites | Fastest path to a page that's still his | About |
+| 27 | Home intro: "I build AI systems that can't afford to be wrong, and I write the research behind them." Title: Dan Wipert · AI systems and research | Projects first, in Dan's own Chorus language | Home, SEO |
+| 28 | Metro Economic Health Report updates weekly; second live-detail candidate for Phase 3 | It refreshes on its own | Metro card |
+| 29 | OpenRouter provider-variance experiment stays off the site until it's run | Only finished work | OpenRouter page |
+
 ## Open items
 
 - Update LinkedIn's CASDAM description to match: Chorus AI Systems Data Analytics Manager, five stages, about $0.05 and 2 minutes per run.
-- Writing vs. "Research & Writing" could blur. If it does, rename the group to "Research."
-- Update cadence and repo link for the Metro Economic Health Report.
-- OpenRouter Weekly's provider-variance experiment: still planned, or dropped?
+- Contact email address: hello@danielwipert.com or another?
+- Metro Economic Health Report repo link (if public).
+- Featured shelf picks and final topic list (after the LinkedIn import).
+- Typefaces, colors, card style, headshot treatment (mockup step).

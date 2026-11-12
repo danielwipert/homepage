@@ -2,7 +2,7 @@
 
 What goes on the Work page. Last updated 2026-11-11.
 
-## Main: Research & Writing
+## Main: Research
 
 ### AI Operations Management (textbook)
 - **Status:** Building. 3 of 15 chapters published free on the web, with PDFs. Print and ebook in preparation.

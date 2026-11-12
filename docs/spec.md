@@ -1,6 +1,6 @@
 # danielwipert.com: Site Spec
 
-**Version:** 1.0 (draft) · **Date:** 2026-11-11 · **Owner:** Dan Wipert
+**Version:** 1.1 · **Date:** 2026-11-12 · **Owner:** Dan Wipert
 
 This is the build spec for danielwipert.com. It turns every decision in [decisions.md](decisions.md) into pages, files, and steps. Where something isn't decided yet, it says so and points to the open questions at the end.
 
@@ -60,13 +60,13 @@ Navigation (every page): **Work · Writing · About**, with the name "Dan Wipert
 
 Order, top to bottom:
 
-1. **Intro line.** Name plus one sentence on what Dan does. No headshot required (open question Q4).
-2. **Research & Writing.** Two large cards: AI Operations Management textbook, Applied AI Case Study Library.
+1. **Intro line.** Name, then: *"I build AI systems that can't afford to be wrong, and I write the research behind them."* No headshot on Home.
+2. **Research.** Two large cards: AI Operations Management textbook, Applied AI Case Study Library.
 3. **Chorus AI Systems.** Four large cards: Dossier, CASDAM, BRAG, Jev vs. the Frontier. A one-line note under the group heading explains Chorus.
 4. **Also built.** Two small cards: OpenRouter Weekly, U.S. Metro Economic Health Report.
 5. **Featured writing.** The 5 to 6 pinned pieces, as a horizontal shelf (stacks vertically on phones).
 6. **Latest writing.** The 3 newest posts, with a link to the full library.
-7. **Footer.** LinkedIn, GitHub, email (open question Q5), RSS, copyright.
+7. **Footer.** LinkedIn, GitHub, contact email, RSS, copyright.
 
 ### 5.2 Project card (used on Home and Work)
 
@@ -85,7 +85,7 @@ The whole card links to the project's page on this site. Main cards are large wi
 
 ### 5.3 Work index
 
-All shipped projects, grouped exactly as on Home (Research & Writing, Chorus AI Systems, Also built). Same cards, no Featured writing.
+All shipped projects, grouped exactly as on Home (Research, Chorus AI Systems, Also built). Same cards, no Featured writing.
 
 ### 5.4 Project page: Main (case study)
 
@@ -127,14 +127,15 @@ Topic name, a one-line description, and every post with that tag, newest first.
 
 ### 5.9 About
 
+0. **Headshot.** Small, at the top of the page. The only place a photo appears.
 1. **The story.** 3 to 5 short paragraphs: retail and DTC operations at Bonobos, Etsy, HavenLock, Summersalt, and Bodily; the English MA and teaching; the move into AI; Chorus AI Systems and the textbook.
 2. **Chorus AI Systems.** A short paragraph explaining the label seen on project cards.
 3. **Timeline.** One line per role, built from cv.md: years, title, company.
 4. **Education, certifications, license.** Compact lists, built from cv.md.
 5. **CV link.** A small "Download CV (PDF)" link.
-6. **Contact.** LinkedIn, GitHub, email.
+6. **Contact.** LinkedIn, GitHub, and a contact email (suggested: hello@danielwipert.com, forwarded to Dan's inbox through Cloudflare Email Routing; the address is hidden from spam bots).
 
-The story is written by Dan (Claude can draft from cv.md for him to rewrite). No skills grids, no "hire me" language.
+Claude drafts the story from cv.md and what it knows of Dan's path; Dan rewrites it in his own voice. No skills grids, no "hire me" language.
 
 ### 5.10 404
 
@@ -159,7 +160,7 @@ src/content/
 | fullName | no | Boosted Retrieval Augmented Generation |
 | summary | yes | RAG with two skeptics that try to disprove every answer |
 | tier | yes | `main` or `minor` |
-| group | yes | `research-writing`, `chorus`, or `also-built` |
+| group | yes | `research`, `chorus`, or `also-built` |
 | order | yes | 3 (position within its group) |
 | status | yes | `shipped` or `building` |
 | chorus | yes | true / false (shows the label) |
@@ -234,6 +235,7 @@ Magazine-quality type for reading; project cards that feel alive. Projects lead,
 - Color palette and accent color
 - Card styling and how "alive" the cards feel
 - Whether the textbook's look (navy, rust, teal, amber) carries over or stays the book's own
+- Headshot treatment (Dan likes filtered, faded-print photo looks; to try in the mockup)
 
 The mockup comes right after this spec. Once approved, the colors, fonts, and spacing are written into a short design section here.
 
@@ -241,7 +243,7 @@ The mockup comes right after this spec. Once approved, the colors, fonts, and sp
 
 | Item | How |
 |---|---|
-| Page titles | `<Page> · Dan Wipert`; Home is `Dan Wipert · AI operations, systems, and research` (wording to confirm) |
+| Page titles | `<Page> · Dan Wipert`; Home is `Dan Wipert · AI systems and research` |
 | Descriptions | One sentence per page, from the summary or excerpt field |
 | Sitemap | Astro's sitemap add-on, generated on every build |
 | robots.txt | Allows everything; points to the sitemap |
@@ -312,22 +314,30 @@ Each phase ends with something live and working.
 - **Done when:** every kept post is live, tagged, and searchable, and the Featured shelf shows Dan's 5 to 6 picks.
 
 ### Phase 3: Alive
-- Live details on cards (first: OpenRouter Weekly's open-weight share, read from that project's published data at build time)
+- Live details on cards, read from each project's published data at build time. First: OpenRouter Weekly (this week's open-weight share). Second: Metro Economic Health Report (this week's top metro); it also updates weekly.
 - A weekly scheduled rebuild so live details stay fresh
 - Polish from real use
 - **Done when:** at least one card updates itself weekly with no manual step.
 
 ## 13. Open questions
 
+### Answered (2026-11-12)
+
+| # | Question | Answer |
+|---|---|---|
+| Q4 | Headshot? | Small headshot on About only |
+| Q5 | Public contact | LinkedIn plus a contact email (address to confirm; suggested hello@danielwipert.com via Cloudflare forwarding) |
+| Q6 | Home intro and title | "I build AI systems that can't afford to be wrong, and I write the research behind them." Title: Dan Wipert · AI systems and research |
+| Q7 | Group naming | The textbook and Case Study Library group is called "Research" |
+| Q8 | Metro report | Updates weekly; repo link still to come (card links to the site until then) |
+| Q9 | OpenRouter provider experiment | Leave it out until it's run |
+| Q10 | About story | Claude drafts, Dan rewrites |
+
+### Still open
+
 | # | Question | Needed by |
 |---|---|---|
-| Q1 | Which 5 to 6 pieces go on the Featured shelf? | Phase 2 |
-| Q2 | Final topic list | Phase 2 |
-| Q3 | Typefaces, colors, and card style | Mockup step |
-| Q4 | Headshot or no headshot? | Mockup step |
-| Q5 | Public contact: email address, or LinkedIn only? | Phase 1 |
-| Q6 | Home intro sentence and page title wording | Phase 1 |
-| Q7 | "Research & Writing" vs. "Writing" naming clash: keep, or rename the group to "Research"? | Mockup step |
-| Q8 | Metro Economic Health Report: update cadence and repo link | Phase 1 |
-| Q9 | OpenRouter Weekly's provider-variance experiment: mention it or not? | Phase 1 |
-| Q10 | About story: Dan writes it, or Claude drafts for Dan to rewrite? | Phase 1 |
+| Q1 | Which 5 to 6 pieces go on the Featured shelf? | Phase 2, after the import |
+| Q2 | Final topic list | Phase 2, after the import |
+| Q3 | Typefaces, colors, card style | The mockup step |
+| Q11 | Contact email address: hello@danielwipert.com or another? | Phase 1 |

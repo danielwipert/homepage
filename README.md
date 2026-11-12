@@ -16,7 +16,7 @@ Film, art, and music writing go on a separate site later. This one is AI and wor
 
 | Section | What's in it |
 |---|---|
-| Work | Project cards in two Main groups (Research & Writing, Chorus AI Systems), plus a Minor row |
+| Work | Project cards in two Main groups (Research, Chorus AI Systems), plus a Minor row |
 | Writing | Featured shelf of 5 to 6 pieces, then the full library: newest first, topic tags, search |
 | About | Short story of my path, a compact timeline, a small PDF CV link |
 
