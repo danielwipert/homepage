@@ -1,0 +1,92 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { GROUPS, SITE } from '../../site';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects', ({ data }) => data.published);
+  return projects.map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const p = project.data;
+const { Content } = await render(project);
+const group = GROUPS[p.group];
+const all = await getCollection('projects', ({ data }) => data.published);
+const related = p.related.map((id) => all.find((x) => x.id === id)).filter(Boolean);
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': p.group === 'research' && p.id === 'aiom-textbook' ? 'Book' : 'CreativeWork',
+  name: p.fullName && !p.fullName.startsWith('Research note') ? `${p.title} (${p.fullName})` : p.title,
+  description: p.summary,
+  url: new URL(`/work/${project.id}/`, SITE.url).href,
+  author: { '@type': 'Person', name: SITE.name, url: SITE.url },
+  ...(p.siteUrl ? { sameAs: [p.siteUrl, ...(p.repoUrl ? [p.repoUrl] : [])] } : {}),
+};
+---
+<Base title={p.title} description={p.summary} jsonLd={ld} current="work">
+  <article>
+    <header class="ph halftone">
+      <div class="wrap ph-inner">
+        <a href="/work/" class="crumb mono">← DEPT. {group.dept} · {group.name.toUpperCase()}</a>
+        <div class="chips">
+          <span class="chip solid">{p.kicker}</span>
+          <span class="chip"><span class:list={['lamp', p.status]}>{p.status === 'shipped' ? 'LIVE' : 'IN PROGRESS'}</span></span>
+          {p.chorus && <span class="chip">CHORUS AI SYSTEMS</span>}
+        </div>
+        <h1>{p.title}</h1>
+        {p.fullName && <p class="full mono">{p.fullName.toUpperCase()}</p>}
+        <p class="sum">{p.summary}</p>
+        <div class="ph-row">
+          <div class="btns">
+            {p.siteUrl && <a href={p.siteUrl} class="btn btn-orange">{(p.siteLabel ?? 'Visit the full site').toUpperCase()} →</a>}
+            {p.repoUrl && <a href={p.repoUrl} class="btn btn-plain">VIEW THE CODE</a>}
+          </div>
+          <div class="screen-violet crt soft stat">
+            <div class="v-num glowp">{p.stat}</div>
+            <div class="v-label">{p.statLabel}</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="wrap body">
+      <div class="prose"><Content /></div>
+      <aside class="side">
+        <div class="card">
+          <h2 class="mono">STACK</h2>
+          <ul>{p.stack.map((s) => <li>{s}</li>)}</ul>
+        </div>
+        {related.length > 0 && (
+          <div class="card">
+            <h2 class="mono">RELATED</h2>
+            <ul>{related.map((r) => <li><a href={`/work/${r!.id}/`}>{r!.data.title}</a></li>)}</ul>
+          </div>
+        )}
+      </aside>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .ph { border-bottom: 2px solid var(--ink); }
+  .ph-inner { padding-top: 56px; padding-bottom: 56px; }
+  .crumb { display: inline-block; font-size: 12px; letter-spacing: 2px; color: var(--muted); text-decoration: none; margin-bottom: 24px; }
+  .crumb:hover { color: var(--orange-text); }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  h1 { margin: 22px 0 0; font-weight: 800; font-size: clamp(48px, 7vw, 96px); line-height: .95; letter-spacing: -2.5px; }
+  .full { margin: 12px 0 0; font-size: 13px; color: var(--muted); }
+  .sum { margin: 20px 0 0; max-width: 46ch; font-size: clamp(21px, 2.2vw, 26px); line-height: 1.4; }
+  .ph-row { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
+  .btns { display: flex; flex-wrap: wrap; gap: 14px; }
+  .stat { min-width: 220px; box-shadow: 6px 6px 0 var(--ink); }
+  .stat .v-num { font-size: 36px; }
+  .body { display: flex; flex-wrap: wrap; gap: 48px 72px; padding-top: 24px; padding-bottom: 96px; align-items: flex-start; }
+  .body .prose { flex: 1 1 560px; min-width: 0; }
+  .side { flex: 0 1 300px; min-width: 240px; display: grid; gap: 20px; padding-top: 56px; position: sticky; top: 24px; }
+  .card { background: var(--surface); border: 2px solid var(--ink); border-radius: 16px; padding: 20px 22px; box-shadow: 5px 5px 0 var(--ink); }
+  .card h2 { margin: 0 0 10px; font-size: 12px; letter-spacing: 3px; color: var(--muted); font-weight: 500; }
+  .card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 17px; }
+  @media (max-width: 900px) { .side { position: static; padding-top: 0; } }
+</style>

@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Plate from '../../components/Plate.astro';
+import ChorusCard from '../../components/ChorusCard.astro';
+import TrackerCard from '../../components/TrackerCard.astro';
+import ResearchPanels from '../../components/ResearchPanels.astro';
+
+const all = (await getCollection('projects', ({ data }) => data.published)).sort((a, b) => a.data.order - b.data.order);
+const research = all.filter((p) => p.data.group === 'research');
+const chorus = all.filter((p) => p.data.group === 'chorus');
+const trackers = all.filter((p) => p.data.group === 'trackers');
+const book = research.find((p) => p.id === 'aiom-textbook')!;
+const library = research.find((p) => p.id === 'ai-case-study-library')!;
+---
+<Base title="Work" description="Everything Daniel Wipert has built and shipped: AI research, the Chorus AI Systems pipelines, and weekly public data trackers." current="work">
+  <section class="wrap" style="padding-top: 72px;">
+    <p class="mono" style="margin: 0; font-size: 13px; letter-spacing: 3px; color: var(--muted);">C:\DANIEL&gt; DIR /WORK</p>
+    <h1 style="margin: 12px 0 0; font-weight: 800; font-size: clamp(48px, 7vw, 96px); line-height: .95; letter-spacing: -2.5px;">The work</h1>
+    <p style="margin: 20px 0 0; max-width: 52ch; font-size: 22px; line-height: 1.45;">Everything here is finished and live. Each project has its own page, and most link out to a full site and the code behind it.</p>
+  </section>
+
+  <section class="wrap" style="padding-top: 72px; padding-bottom: 32px;">
+    <div class="section-head">
+      <Plate dept="01" title="Research" />
+      <p class="intro">Long-form work on how organizations should actually run AI. <span>Both free to read.</span></p>
+    </div>
+    <ResearchPanels book={book} library={library} />
+  </section>
+
+  <section class="wrap" style="padding-top: 72px; padding-bottom: 32px;">
+    <div class="section-head">
+      <Plate dept="02" title="Chorus AI Systems" />
+      <p class="intro">Working AI systems from my studio. <span>Every claim gets checked against the facts before anyone reads it.</span></p>
+    </div>
+    <div class="chorus-grid">{chorus.map((p, i) => <ChorusCard project={p} unit={i + 1} />)}</div>
+  </section>
+
+  <section class="wrap" style="padding-top: 72px; padding-bottom: 96px;">
+    <div class="section-head">
+      <Plate dept="03" title="Weekly Trackers" />
+      <p class="intro"><span>Public data trackers that rebuild themselves every week.</span></p>
+    </div>
+    <div class="tracker-grid">{trackers.map((p) => <TrackerCard project={p} />)}</div>
+  </section>
+</Base>

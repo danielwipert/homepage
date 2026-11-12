@@ -1,0 +1,81 @@
+---
+import Base from '../layouts/Base.astro';
+import Plate from '../components/Plate.astro';
+import { roles, education, certifications, licenses } from '../data/cv';
+import { SITE } from '../site';
+
+const profile = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  mainEntity: { '@type': 'Person', name: SITE.name, url: SITE.url, sameAs: [SITE.linkedin, SITE.github] },
+};
+---
+<Base title="About" description="Daniel Wipert: fifteen years running operations at Bonobos, Etsy, Summersalt and Bodily, now building AI systems that can't afford to be wrong." jsonLd={profile} current="about">
+  <section class="wrap top">
+    <div class="photo" role="img" aria-label="Photo of Daniel Wipert, coming soon"><span class="mono">PHOTO</span></div>
+    <div class="intro-text">
+      <p class="mono kicker">C:\DANIEL&gt; WHOAMI</p>
+      <h1>About</h1>
+      <p class="lede">I spent fifteen years making operations work at companies that were growing faster than their systems. Now I build AI that operations can trust.</p>
+    </div>
+  </section>
+
+  <section class="wrap story">
+    <div class="prose">
+      <p>I started in English. A master's degree in literary theory and a license to teach high school taught me to read closely, argue from evidence, and explain hard things plainly. Those habits turned out to matter more in operations than anyone would guess.</p>
+      <p>In 2010 I joined Bonobos when it was doing under $10 million a year, and helped build the customer operations that carried it past $100 million. At Etsy I ran fraud and risk operations for more than $2 billion in annual payments, and built my first closed loop: fraud outcomes fed straight back into detection, so the system got sharper every week. After that came HavenLock, Summersalt, and Bodily, building fulfillment, supply chain, and data systems from scratch, usually while the business was scaling fast around them.</p>
+      <p>The pattern was always the same. Growth exposes every system that can't check its own work. So when AI arrived in operations, I saw the problem quickly: models that sound right, with nothing in place to prove they are.</p>
+      <p>In 2025 I went back to school on purpose, at Kellogg, Google, Microsoft, Michigan and Imperial, and founded <strong>Chorus AI Systems</strong>, my studio for AI that can't afford to be wrong. Every system I build there follows one rule: no claim reaches a person until it has been checked against the facts. CASDAM, BRAG, Dossier, and the Jev experiment all come from that idea. You'll see the Chorus label on them across this site.</p>
+      <p>Alongside the systems, I'm writing <em>AI Operations Management</em>, a textbook for running AI as the metered operating resource it is, and building the Applied AI Case Study Library to test those ideas against what has actually happened. I live in Chicago.</p>
+    </div>
+  </section>
+
+  <section class="wrap cvsec">
+    <div class="section-head" style="margin-bottom: 32px;">
+      <Plate dept="CV" title="The record" />
+      <p class="intro"><span>The short version. The full CV is a click away.</span></p>
+    </div>
+
+    <ol class="timeline">
+      {roles.map((r) => (
+        <li>
+          <span class="years mono">{r.start}–{r.end}</span>
+          <span class="role"><strong>{r.org}</strong> · {r.title}</span>
+        </li>
+      ))}
+    </ol>
+
+    <div class="lists">
+      <div>
+        <h2 class="mono">EDUCATION</h2>
+        <ul>{education.map((e) => <li><strong>{e.school}</strong><br />{e.degree}</li>)}</ul>
+        <h2 class="mono" style="margin-top: 28px;">LICENSE</h2>
+        <ul>{licenses.map((l) => <li><strong>{l.name}</strong><br />{l.org}, {l.note}</li>)}</ul>
+      </div>
+      <div>
+        <h2 class="mono">CERTIFICATIONS</h2>
+        <ul>{certifications.map((c) => <li><strong>{c.name}</strong><br />{c.org} · {c.year}</li>)}</ul>
+      </div>
+    </div>
+
+    <p style="margin-top: 40px;"><a href="/cv.pdf" class="mono" style="font-size: 14px; font-weight: 600;">DOWNLOAD CV (PDF) →</a></p>
+  </section>
+</Base>
+
+<style>
+  .top { padding-top: 72px; display: flex; flex-wrap: wrap; align-items: center; gap: 32px 48px; }
+  .photo { flex: 0 0 auto; width: 180px; height: 180px; border-radius: 50%; border: 2px solid var(--ink); background: radial-gradient(circle at 35% 30%, #F49A5E, var(--orange) 60%, #B84A18); box-shadow: 8px 8px 0 var(--ink); display: flex; align-items: center; justify-content: center; color: #14161B; font-size: 12px; }
+  .intro-text { flex: 1 1 400px; min-width: 0; }
+  .kicker { margin: 0; font-size: 13px; letter-spacing: 3px; color: var(--muted); }
+  h1 { margin: 10px 0 0; font-weight: 800; font-size: clamp(48px, 7vw, 96px); line-height: .95; letter-spacing: -2.5px; }
+  .lede { margin: 18px 0 0; max-width: 46ch; font-size: clamp(21px, 2.2vw, 26px); line-height: 1.4; }
+  .story { padding-top: 48px; }
+  .cvsec { padding-top: 56px; padding-bottom: 96px; }
+  .timeline { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+  .timeline li { display: flex; flex-wrap: wrap; gap: 6px 28px; padding: 16px 0; border-bottom: 1px solid var(--shadow); font-size: 19px; }
+  .years { flex: 0 0 130px; font-size: 13px; color: var(--muted); padding-top: 4px; }
+  .role { flex: 1 1 300px; }
+  .lists { margin-top: 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 32px 56px; }
+  .lists h2 { margin: 0 0 12px; font-size: 12px; letter-spacing: 3px; color: var(--muted); font-weight: 500; }
+  .lists ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; font-size: 17px; line-height: 1.4; }
+</style>

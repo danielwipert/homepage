@@ -1,0 +1,61 @@
+---
+// Print-only page. scripts/make_cv_pdf.cjs turns it into public/cv.pdf. Not in the sitemap.
+import Base from '../layouts/Base.astro';
+import { roles, education, certifications, licenses } from '../data/cv';
+import { SITE } from '../site';
+---
+<Base title="CV" description="CV of Daniel Wipert." noindex bare>
+  <div class="cv">
+    <header>
+      <div>
+        <h1>Daniel S. Wipert</h1>
+        <p class="tag">AI Operations · Founder, Chorus AI Systems · Chicago, IL</p>
+      </div>
+      <p class="contact">danielwipert.com<br />{SITE.emailUser}@{SITE.emailDomain}<br />linkedin.com/in/daniel-wipert<br />github.com/danielwipert</p>
+    </header>
+
+    <p class="summary">Operations leader turned AI builder. Fifteen years scaling operations at Bonobos, Etsy, HavenLock, Summersalt and Bodily; now building closed-loop, auditable AI systems for work that can't afford to be wrong.</p>
+
+    <h2>Experience</h2>
+    {roles.map((r) => (
+      <section class="role">
+        <div class="rhead"><strong>{r.title}, {r.org}</strong><span>{r.start}–{r.end} · {r.place}</span></div>
+        <p class="rsum">{r.summary}</p>
+        <ul>{r.bullets.map((b) => <li>{b}</li>)}</ul>
+      </section>
+    ))}
+
+    <div class="cols">
+      <div>
+        <h2>Education</h2>
+        {education.map((e) => <p class="item"><strong>{e.degree}</strong><br />{e.school}</p>)}
+        <h2>License</h2>
+        {licenses.map((l) => <p class="item"><strong>{l.name}</strong><br />{l.org}, {l.note}</p>)}
+      </div>
+      <div>
+        <h2>Certifications</h2>
+        {certifications.map((c) => <p class="item"><strong>{c.name}</strong><br />{c.org}, {c.year}</p>)}
+      </div>
+    </div>
+  </div>
+</Base>
+
+<style>
+  @page { size: Letter; margin: 0.55in 0.6in; }
+  :global(body) { background: #fff; color: #14161B; }
+  .cv { max-width: 7.3in; margin: 0 auto; font-family: var(--font-body); font-size: 10.5pt; line-height: 1.38; color: #14161B; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; border-bottom: 3px solid #F26A2E; padding-bottom: 10px; }
+  h1 { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: 26pt; letter-spacing: -0.5pt; line-height: 1; }
+  .tag { margin: 6px 0 0; font-family: var(--font-mono); font-size: 8pt; letter-spacing: 1.5pt; text-transform: uppercase; color: #555B66; }
+  .contact { margin: 0; text-align: right; font-family: var(--font-mono); font-size: 8pt; line-height: 1.5; color: #555B66; }
+  .summary { margin: 12px 0 4px; font-size: 11pt; }
+  h2 { margin: 16px 0 6px; font-family: var(--font-mono); font-weight: 600; font-size: 8.5pt; letter-spacing: 2pt; text-transform: uppercase; color: #B8461A; }
+  .role { margin-bottom: 9px; break-inside: avoid; }
+  .rhead { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: var(--font-display); font-size: 10.5pt; }
+  .rhead span { font-family: var(--font-mono); font-size: 8pt; color: #555B66; white-space: nowrap; }
+  .rsum { margin: 2px 0 2px; font-style: italic; }
+  ul { margin: 2px 0 0; padding-left: 16px; }
+  li { margin: 1px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; break-inside: avoid; }
+  .item { margin: 0 0 6px; font-size: 9.5pt; }
+</style>

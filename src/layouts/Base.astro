@@ -1,0 +1,145 @@
+---
+import '../styles/global.css';
+import { SITE } from '../site';
+
+interface Props {
+  title?: string;          // page name; omitted on Home
+  description: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  noindex?: boolean;
+  current?: 'work' | 'writing' | 'about';
+  bare?: boolean;          // no header/footer (print pages)
+}
+const { title, description, jsonLd, noindex = false, current, bare = false } = Astro.props;
+const fullTitle = title ? `${title} · ${SITE.name}` : SITE.title;
+const canonical = new URL(Astro.url.pathname, SITE.url).href;
+const ogImage = new URL('/og.png', SITE.url).href;
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: SITE.name,
+  alternateName: 'Dan Wipert',
+  url: SITE.url,
+  jobTitle: 'Founder, Chorus AI Systems',
+  address: { '@type': 'PostalAddress', addressLocality: 'Chicago', addressRegion: 'IL', addressCountry: 'US' },
+  sameAs: [SITE.linkedin, SITE.github],
+};
+const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+
+const links = [
+  { label: 'LINKEDIN', handle: 'in/daniel-wipert', href: SITE.linkedin },
+  { label: 'GITHUB', handle: 'github.com/danielwipert', href: SITE.github },
+];
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex" />}
+  <meta name="theme-color" content="#F5F3EE" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0F1115" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={SITE.name} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=VT323&display=swap" />
+
+  <script type="application/ld+json" set:html={JSON.stringify(person)} />
+  {ld.map((item) => <script type="application/ld+json" set:html={JSON.stringify(item)} />)}
+</head>
+<body>
+  {!bare && (
+    <header class="site-header">
+      <div class="wrap">
+        <a href="/" class="brand" aria-label="Daniel Wipert, home">
+          <span class="badge" aria-hidden="true">DW</span>
+          <span class="brand-name">DANIEL WIPERT</span>
+        </a>
+        <nav class="site-nav" aria-label="Main">
+          <a href="/work/" aria-current={current === 'work' ? 'page' : undefined}>WORK</a>
+          <a href="/writing/" aria-current={current === 'writing' ? 'page' : undefined}>WRITING</a>
+          <a href="/about/" aria-current={current === 'about' ? 'page' : undefined}>ABOUT</a>
+          <a href="#contact" class="nav-contact">CONTACT ME</a>
+        </nav>
+      </div>
+    </header>
+  )}
+
+  <main id="main">
+    <slot />
+  </main>
+
+  {!bare && (
+    <footer class="crt site-footer" style="background: radial-gradient(ellipse at 30% 0%, #1C222B, #07090C 70%);">
+      <div id="contact" class="wrap" style="padding-top: 88px; padding-bottom: 48px; position: relative; z-index: 1;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 28px 48px; padding-bottom: 48px; border-bottom: 2px dashed rgba(255,176,0,.35);">
+          <div style="flex: 1 1 440px; min-width: 0;">
+            <div class="glow" style="font-family: var(--font-crt); font-size: 22px; color: var(--phosphor);">C:\DANIEL&gt; CONTACT</div>
+            <h2 style="margin: 12px 0 0; font-weight: 800; font-size: clamp(34px, 4.4vw, 60px); line-height: 1.02; letter-spacing: -1.5px; color: #F5F3EE;">Have a problem AI can't afford to get wrong?</h2>
+            <p style="margin: 16px 0 0; max-width: 52ch; font-size: 20px; line-height: 1.45; color: #C9CED6;">I'm always up for a conversation about AI systems, research, or operations. Say hello.</p>
+          </div>
+          <a href="/about/#contact" class="btn js-mail" style="min-height: 64px; padding: 0 34px; font-size: 16px; color: #14161B; background: linear-gradient(#FF8A52, #F26A2E); border-color: #FFB000; box-shadow: inset 0 2px 0 rgba(255,255,255,.4), 0 0 0 6px rgba(255,176,0,.12), 0 0 30px rgba(255,122,61,.45);">CONTACT ME →</a>
+        </div>
+
+        <nav aria-label="Elsewhere" class="term-links">
+          {links.map((l) => (
+            <a href={l.href} class="term-link lift" rel="me">
+              <span class="tl-text"><span class="glow tl-label">&gt; {l.label}</span><span class="tl-handle">{l.handle}</span></span>
+              <span class="glow tl-arrow" aria-hidden="true">→</span>
+            </a>
+          ))}
+          <a href="/about/#contact" class="term-link lift js-mail">
+            <span class="tl-text"><span class="glow tl-label">&gt; EMAIL</span><span class="tl-handle js-mail-text">hello at danielwipert dot com</span></span>
+            <span class="glow tl-arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="/cv.pdf" class="term-link lift">
+            <span class="tl-text"><span class="glow tl-label">&gt; CV</span><span class="tl-handle">download the PDF</span></span>
+            <span class="glow tl-arrow" aria-hidden="true">→</span>
+          </a>
+        </nav>
+
+        <div style="margin-top: 64px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px;">
+          <div class="glow" style="font-family: var(--font-crt); font-size: clamp(38px, 5vw, 68px); line-height: 1; color: var(--phosphor);">END TRANSMISSION.<span class="cursor" style="margin-left: 12px;"></span></div>
+          <p style="margin: 0; font-family: var(--font-mono); font-size: 13px; letter-spacing: 2px; color: #C9CED6;">© {new Date().getFullYear()} DANIEL WIPERT · CHICAGO</p>
+        </div>
+      </div>
+    </footer>
+  )}
+
+  <style>
+    .term-links { margin-top: 44px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 18px; }
+    .term-link {
+      display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 84px; padding: 16px 20px;
+      text-decoration: none; color: var(--phosphor); background: rgba(255,176,0,.07); border: 2px solid var(--phosphor); border-radius: 14px;
+      box-shadow: inset 0 0 18px rgba(255,176,0,.12), 0 0 22px rgba(255,176,0,.18);
+    }
+    .term-link:hover { color: var(--phosphor); }
+    .tl-text { display: flex; flex-direction: column; min-width: 0; }
+    .tl-label { font-family: var(--font-crt); font-size: 32px; line-height: 1; }
+    .tl-handle { font-family: var(--font-crt); font-size: 19px; line-height: 1.2; opacity: .85; overflow-wrap: anywhere; }
+    .tl-arrow { font-family: var(--font-crt); font-size: 34px; }
+  </style>
+
+  <script is:inline define:vars={{ u: SITE.emailUser, d: SITE.emailDomain }}>
+    var addr = u + '@' + d;
+    document.querySelectorAll('.js-mail').forEach(function (a) { a.href = 'mailto:' + addr; });
+    document.querySelectorAll('.js-mail-text').forEach(function (s) { s.textContent = addr; });
+  </script>
+</body>
+</html>

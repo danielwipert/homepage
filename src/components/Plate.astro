@@ -1,0 +1,12 @@
+---
+// Dark section nameplate: "DEPT. 01  Research"
+interface Props { dept: string; title: string; as?: 'h1' | 'h2'; }
+const { dept, title, as = 'h2' } = Astro.props;
+const Tag = as;
+---
+<div class="plate">
+  <span class="screw" aria-hidden="true"></span>
+  <span class="dept">DEPT. {dept}</span>
+  <Tag>{title}</Tag>
+  <span class="screw" aria-hidden="true"></span>
+</div>

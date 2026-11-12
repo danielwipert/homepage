@@ -1,0 +1,190 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Plate from '../components/Plate.astro';
+import ChorusCard from '../components/ChorusCard.astro';
+import TrackerCard from '../components/TrackerCard.astro';
+import ResearchPanels from '../components/ResearchPanels.astro';
+import { SITE } from '../site';
+
+const all = (await getCollection('projects', ({ data }) => data.published)).sort((a, b) => a.data.order - b.data.order);
+const research = all.filter((p) => p.data.group === 'research');
+const chorus = all.filter((p) => p.data.group === 'chorus');
+const trackers = all.filter((p) => p.data.group === 'trackers');
+const book = research.find((p) => p.id === 'aiom-textbook')!;
+const library = research.find((p) => p.id === 'ai-case-study-library')!;
+
+// The terminal file listing, built from the project files.
+const W = 32;
+const row = (name: string, val: string) => `  ${name} ${'.'.repeat(Math.max(2, W - name.length - val.length - 2))} ${val}`;
+const block = (label: string, items: typeof all) => ({ label, lines: items.map((p) => row(p.data.fileName, p.data.termValue)) });
+const listing = [block('[RESEARCH]', research), block('[CHORUS AI SYSTEMS]', chorus), block('[WEEKLY TRACKERS]', trackers)];
+const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const screen = [
+  'C:\\DANIEL&gt; DIR /WORK',
+  ...listing.flatMap((b) => [`<span class="dim">${esc(b.label)}</span>`, ...b.lines.map(esc)]),
+  `<span class="dim">${all.length} FILES · ALL SYSTEMS NOMINAL</span>`,
+  'C:\\DANIEL&gt; <span class="cursor"></span>',
+].join('\n');
+
+const depts = [
+  { num: '01', name: 'RESEARCH', what: 'Textbook + case library', href: '#research' },
+  { num: '02', name: 'CHORUS AI SYSTEMS', what: `${chorus.length} working systems`, href: '#chorus' },
+  { num: '03', name: 'WEEKLY TRACKERS', what: 'Live public data', href: '#trackers' },
+  { num: '04', name: 'WRITING', what: 'Essays and notes', href: '#writing' },
+];
+
+const site = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE.name,
+  url: SITE.url,
+  description: SITE.intro,
+};
+---
+<Base description={`Daniel Wipert: ${SITE.intro} Projects, research, and writing on AI systems and operations.`} jsonLd={site}>
+
+  <!-- HERO -->
+  <section class="hero halftone">
+    <div class="hero-fade" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <div class="hero-text">
+        <p class="pill mono"><span class="dotlamp"></span>AI SYSTEMS &amp; RESEARCH · CHICAGO</p>
+        <h1>Daniel<br />Wipert</h1>
+        <p class="intro">{SITE.intro}</p>
+        <div class="hero-btns">
+          <a href="#research" class="btn btn-orange">SEE THE WORK →</a>
+          <a href="/writing/" class="btn btn-plain">READ THE WRITING</a>
+        </div>
+      </div>
+
+      <div class="terminal">
+        <div class="sun" aria-hidden="true"><div></div><div></div></div>
+        <div class="teal-dot" aria-hidden="true"></div>
+        <div class="bezel">
+          <div class="screen crt">
+            <div class="glare" aria-hidden="true"></div>
+            <pre class="glow listing" aria-label="A list of Daniel's projects" set:html={screen}></pre>
+          </div>
+          <div class="bezel-foot">
+            <span class="model">MODEL DW-1966</span>
+            <span class="grille" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="knobs" aria-hidden="true"><i class="k1"></i><i class="k2"></i></span>
+          </div>
+        </div>
+        <div class="stand" aria-hidden="true"></div>
+        <div class="legs" aria-hidden="true"><i></i><i></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIRECTORY -->
+  <nav aria-label="Sections" class="directory">
+    <div class="wrap dir-grid">
+      {depts.map((d) => (
+        <a href={d.href}>
+          <span class="glow dnum">{d.num}</span>
+          <span class="dtext"><span class="dname">{d.name}</span><span class="dwhat">{d.what}</span></span>
+        </a>
+      ))}
+    </div>
+  </nav>
+
+  <!-- RESEARCH -->
+  <section id="research" class="wrap section">
+    <div class="section-head">
+      <Plate dept="01" title="Research" />
+      <p class="intro">Long-form work on how organizations should actually run AI. <span>A textbook that sets out the discipline, and a case library that tests it against what really happened. Both free to read.</span></p>
+    </div>
+    <ResearchPanels book={book} library={library} />
+  </section>
+
+  <!-- CHORUS -->
+  <section id="chorus" class="wrap section">
+    <div class="section-head">
+      <Plate dept="02" title="Chorus AI Systems" />
+      <p class="intro">Working AI systems from my studio. <span>Each one is built on the same rule: every claim gets checked against the facts before anyone reads it. All {chorus.length} are live, with code you can inspect.</span></p>
+    </div>
+    <div class="chorus-grid">
+      {chorus.map((p, i) => <ChorusCard project={p} unit={i + 1} />)}
+    </div>
+  </section>
+
+  <!-- TRACKERS -->
+  <section id="trackers" class="wrap section">
+    <div class="section-head">
+      <Plate dept="03" title="Weekly Trackers" />
+      <p class="intro"><span>Public data trackers that rebuild themselves every week.</span></p>
+    </div>
+    <div class="tracker-grid">
+      {trackers.map((p) => <TrackerCard project={p} />)}
+    </div>
+  </section>
+
+  <!-- WRITING -->
+  <section id="writing" class="writing-band">
+    <div class="wrap" style="padding-top: 88px; padding-bottom: 88px;">
+      <div class="section-head" style="margin-bottom: 32px;">
+        <Plate dept="04" title="Writing" />
+        <p class="intro">Essays and notes on AI, operations, and the economics of both. The full library is moving here from LinkedIn, sorted by date and topic.</p>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 14px;">
+        <a href="/writing/" class="btn btn-dark">WHAT'S COMING →</a>
+        <a href={SITE.linkedin} class="btn btn-plain">READ IT ON LINKEDIN FOR NOW</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section { padding-top: 88px; padding-bottom: 40px; }
+
+  .hero { position: relative; overflow: hidden; border-bottom: 2px solid var(--ink); }
+  .hero-fade { position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 40%, transparent 30%, var(--bg) 78%); }
+  .hero-inner { position: relative; padding-top: clamp(48px, 7vw, 104px); padding-bottom: clamp(56px, 7vw, 96px); display: flex; flex-wrap: wrap; align-items: center; gap: 64px; }
+  .hero-text { flex: 1 1 460px; min-width: 0; position: relative; z-index: 1; }
+  .pill { margin: 0 0 20px; display: inline-flex; align-items: center; gap: 10px; font-size: 12px; letter-spacing: 3px; background: var(--surface); border: 2px solid var(--ink); border-radius: 999px; padding: 8px 16px; box-shadow: 0 3px 0 var(--ink); }
+  .dotlamp { width: 10px; height: 10px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 8px var(--teal); }
+  .hero h1 { margin: 0; font-weight: 800; font-size: clamp(60px, 8.6vw, 128px); line-height: 0.92; letter-spacing: -3px; }
+  .hero .intro { margin: 32px 0 0; max-width: 34ch; font-size: clamp(21px, 2.2vw, 28px); line-height: 1.35; }
+  .hero-btns { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px; }
+
+  .terminal { flex: 1 1 440px; min-width: 0; max-width: 580px; position: relative; }
+  .sun { position: absolute; width: 460px; height: 460px; right: -130px; top: -110px; border-radius: 50%; overflow: hidden; z-index: 0; }
+  .sun div:first-child { height: 50%; background: radial-gradient(circle at 50% 100%, #F49A5E, var(--orange) 70%); }
+  .sun div:last-child { height: 50%; background: repeating-linear-gradient(to bottom, var(--orange) 0 20px, transparent 20px 32px); }
+  .teal-dot { position: absolute; width: 130px; height: 130px; left: -46px; top: 40%; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #4FB3A8, var(--teal) 65%); box-shadow: 0 12px 24px var(--shadow); z-index: 0; }
+  .bezel { position: relative; z-index: 1; background: linear-gradient(165deg, #F4F3EF 0%, #DEDBD3 45%, #BDB8AD 100%); border: 2px solid #14161B; border-radius: 40px; padding: clamp(16px, 3vw, 28px) clamp(16px, 3vw, 28px) 18px; box-shadow: inset 0 3px 0 rgba(255,255,255,.7), inset 0 -6px 0 rgba(0,0,0,.12), 0 30px 50px var(--shadow), 12px 12px 0 #14161B; }
+  .screen { container-type: inline-size; border-radius: 28px; padding: clamp(16px, 3vw, 28px) clamp(14px, 3vw, 30px); background: radial-gradient(ellipse at 50% 45%, #1C222B 0%, #0D1014 70%, #06080A 100%); box-shadow: inset 0 0 50px rgba(0,0,0,.85), inset 0 0 0 6px #0B0D10, 0 0 0 3px #8C8A84; }
+  .glare { position: absolute; left: 6%; top: 5%; width: 55%; height: 32%; border-radius: 50%; background: radial-gradient(ellipse at 30% 30%, rgba(255,255,255,.10), transparent 70%); z-index: 2; }
+  .listing { position: relative; z-index: 1; margin: 0; font-family: var(--font-crt); font-size: min(22px, 4.5cqi); line-height: 1.3; color: var(--phosphor); white-space: pre; overflow: hidden; }
+  .listing .dim { opacity: .6; }
+  .bezel-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; gap: 12px; }
+  .model { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 3px; color: #14161B; }
+  .grille { display: flex; flex-direction: column; gap: 4px; }
+  .grille i { display: block; width: 110px; height: 3px; background: #6E6C66; border-radius: 2px; box-shadow: 0 1px 0 rgba(255,255,255,.5); }
+  .knobs { display: flex; gap: 12px; }
+  .knobs i { display: block; width: 30px; height: 30px; border-radius: 50%; border: 2px solid #14161B; box-shadow: 0 3px 4px rgba(0,0,0,.35); }
+  .k1 { background: radial-gradient(circle at 35% 30%, #F7A877, var(--orange) 60%, #9C3D12); }
+  .k2 { background: radial-gradient(circle at 35% 30%, #F6D27C, var(--mustard) 60%, #A8761A); }
+  .stand { position: relative; z-index: 1; margin: 0 -24px; height: 34px; border: 2px solid #14161B; border-radius: 8px; background: var(--orange); box-shadow: inset 0 2px 0 rgba(255,255,255,.35), 0 14px 24px var(--shadow); }
+  .legs { display: flex; justify-content: space-between; padding: 0 30px; }
+  .legs i { display: block; width: 12px; height: 54px; background: #14161B; border-radius: 0 0 6px 6px; transform: skewX(14deg); }
+  .legs i:last-child { transform: skewX(-14deg); }
+  @media (max-width: 560px) {
+    .grille { display: none; }
+    .sun { width: 320px; height: 320px; right: -110px; top: -80px; }
+    .stand { margin: 0 -10px; }
+  }
+
+  .directory { background: var(--panel); border-bottom: 2px solid #14161B; }
+  .dir-grid { padding-top: 18px; padding-bottom: 18px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 14px; }
+  .directory a { display: flex; align-items: center; gap: 12px; padding: 10px 14px; text-decoration: none; color: #F5F3EE; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 12px; }
+  .directory a:hover { background: rgba(255,255,255,.12); color: #F5F3EE; }
+  .dnum { font-family: var(--font-crt); font-size: 28px; line-height: 1; color: var(--phosphor); }
+  .dtext { display: flex; flex-direction: column; }
+  .dname { font-family: var(--font-mono); font-weight: 600; font-size: 13px; letter-spacing: 2px; }
+  .dwhat { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; color: #A7ADB8; }
+
+  .writing-band { margin-top: 56px; background: var(--mint); color: var(--mint-ink); border-top: 2px solid var(--ink); box-shadow: inset 0 10px 24px var(--shadow); }
+</style>

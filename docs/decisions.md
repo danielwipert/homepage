@@ -46,10 +46,25 @@ All decisions made on 2026-11-11, one gate at a time.
 | 28 | Metro Economic Health Report updates weekly; second live-detail candidate for Phase 3 | It refreshes on its own | Metro card |
 | 29 | OpenRouter provider-variance experiment stays off the site until it's run | Only finished work | OpenRouter page |
 
+## Design and build (2026-11-12)
+
+| # | Decision | Why | Where it lives |
+|---|---|---|---|
+| 30 | Look: mid-century modern meets old-school computing, modernized. Warm off-white, near-black, orange, mustard, teal; no brown | Dan's taste; earlier passes felt flat, then too old | `src/styles/global.css` |
+| 31 | Fonts: Inter Tight (headings and name), Newsreader (reading), IBM Plex Mono (labels), VT323 (screens) | Modern headings, readable body, computing accents | Base layout |
+| 32 | Name shown as "Daniel Wipert"; plain orange "DW" badge | Dan's call | Header, hero |
+| 33 | Hero terminal shows a DIR listing of all projects, built from the project files | More creative than a status readout; updates itself | Home |
+| 34 | Amber screens for the hero and footer; deep violet screens for project stats | Amber was hard to read on small cards | Cards |
+| 35 | Contact Me button in the header and a contact section in the footer; footer links as glowing terminal boxes | Make reaching out obvious | Base layout |
+| 36 | Light theme by default, dark theme follows the visitor's device | Spec 8.2 | `global.css` |
+| 37 | Writing shows a "moving in" page until the LinkedIn import (Phase 2) | No placeholder titles on a live site | `/writing/` |
+
 ## Open items
 
 - Update LinkedIn's CASDAM description to match: Chorus AI Systems Data Analytics Manager, five stages, about $0.05 and 2 minutes per run.
-- Contact email address: hello@danielwipert.com or another?
+- Contact email: site uses hello@danielwipert.com; needs Cloudflare Email Routing set up, or a different address.
+- Headshot photo for About (placeholder circle until then).
+- Review drafted case studies and About story.
 - Metro Economic Health Report repo link (if public).
 - Featured shelf picks and final topic list (after the LinkedIn import).
 - Typefaces, colors, card style, headshot treatment (mockup step).

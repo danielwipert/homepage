@@ -2,7 +2,7 @@
 
 Dan Wipert's personal homepage: one front door for the projects, the research, and the writing.
 
-**Status:** Planning. Spec v1.0 drafted; no site code yet.
+**Status:** Phase 1 built (Home, Work, 8 project pages, About, Writing placeholder, 404). Going live on Cloudflare Pages.
 
 ## What this site is
 
@@ -38,3 +38,24 @@ Film, art, and music writing go on a separate site later. This one is AI and wor
 - [Site spec](docs/spec.md): every page, the content model, design, SEO, tech, and build phases
 - [Decision log](docs/decisions.md): every choice made so far, and why
 - [Project inventory](docs/projects.md): what goes on the Work page, what's cut, and what's still missing
+
+## Running it
+
+You need Node 22.
+
+```bash
+npm install        # once
+npm run dev        # local preview at http://localhost:4321
+npm run build      # builds the site into dist/
+```
+
+Cloudflare Pages builds the site on every push to `main` (build command `npm run build`, output folder `dist`).
+
+## Where things live
+
+| To change | Edit |
+|---|---|
+| A project's text, numbers, links | `src/content/projects/<project>.md` |
+| The CV (About page and PDF) | `src/data/cv.ts`, then re-run `scripts/make_assets.cjs` |
+| Name, intro line, email, social links | `src/site.ts` |
+| Colors and fonts | `src/styles/global.css` (top of the file) |

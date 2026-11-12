@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../site';
+---
+<Base title="Writing" description="Daniel Wipert's essays and notes on AI, operations, and the economics of both. The full library is moving here from LinkedIn." current="writing">
+  <section class="wrap" style="padding-top: 72px; padding-bottom: 120px;">
+    <p class="mono" style="margin: 0; font-size: 13px; letter-spacing: 3px; color: var(--muted);">C:\DANIEL&gt; DIR /WRITING</p>
+    <h1 style="margin: 12px 0 0; font-weight: 800; font-size: clamp(48px, 7vw, 96px); line-height: .95; letter-spacing: -2.5px;">Writing</h1>
+    <p style="margin: 20px 0 0; max-width: 52ch; font-size: 22px; line-height: 1.45;">Essays and notes on AI, operations, and the economics of both. Every piece is moving here from LinkedIn, into a library you can browse by date and topic, with a few foundational pieces to start with.</p>
+
+    <div class="crt" style="margin-top: 48px; max-width: 720px; border-radius: 20px; padding: 28px 30px; background: radial-gradient(ellipse at 50% 40%, #1C222B, #07090C); border: 2px solid var(--ink); box-shadow: 8px 8px 0 var(--ink);">
+      <pre class="glow" style="position: relative; z-index: 1; margin: 0; font-family: var(--font-crt); font-size: clamp(16px, 3.4vw, 24px); line-height: 1.35; color: var(--phosphor); white-space: pre-wrap;">C:\DANIEL&gt; IMPORT /LINKEDIN
+COPYING ARCHIVE ........ IN PROGRESS
+LIBRARY OPENS .......... SOON
+C:\DANIEL&gt; <span class="cursor"></span></pre>
+    </div>
+
+    <div style="margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px;">
+      <a href={SITE.linkedin} class="btn btn-orange">READ IT ON LINKEDIN FOR NOW →</a>
+      <a href="/work/" class="btn btn-plain">SEE THE WORK</a>
+    </div>
+  </section>
+</Base>

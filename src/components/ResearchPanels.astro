@@ -1,0 +1,115 @@
+---
+// The two big Research panels: the textbook (with book cover) and the case library (with case files).
+import type { CollectionEntry } from 'astro:content';
+interface Props { book: CollectionEntry<'projects'>; library: CollectionEntry<'projects'>; }
+const { book, library } = Astro.props;
+const chapters = Array.from({ length: 15 }, (_, i) => i < 3);
+const caseStats = [
+  { n: '22', label: 'CASES' },
+  { n: '6', label: 'FIELDS' },
+  { n: 'A–C', label: 'EVIDENCE GRADES' },
+];
+---
+<div class="panels">
+  <a href={`/work/${book.id}/`} class="panel lift">
+    <div class="book" aria-hidden="true">
+      <div class="pages"></div>
+      <div class="cover">
+        <div class="spine"></div>
+        <div class="band1"></div><div class="band2"></div>
+        <div class="btitle">AI<br />Operations<br />Management</div>
+        <div class="bauthor">DANIEL S. WIPERT</div>
+      </div>
+    </div>
+    <div class="ptext">
+      <div class="chips"><span class="chip solid">TEXTBOOK</span><span class="chip"><span class="lamp building">IN PROGRESS</span></span></div>
+      <h3>{book.data.title}</h3>
+      <p class="lede">The founding textbook for a new discipline. AI isn't a software subscription; it's a metered resource whose cost follows every use. This book is how you manage it.</p>
+      <p class="for">For leaders, students, and anyone who has to make AI pay for itself.</p>
+      <div class="gauge-head mono"><span>CHAPTERS PUBLISHED</span><span>3 / 15</span></div>
+      <div class="gauge" role="img" aria-label="3 of 15 chapters published">
+        {chapters.map((on) => <span class:list={{ on }}></span>)}
+      </div>
+      <div class="cta mono">READ ABOUT THE BOOK →</div>
+    </div>
+  </a>
+
+  <a href={`/work/${library.id}/`} class="panel panel-mint lift">
+    <div class="ptext">
+      <div class="chips"><span class="chip solid">CASE LIBRARY</span><span class="chip"><span class="lamp">LIVE · GROWING</span></span></div>
+      <h3>{library.data.title}</h3>
+      <p class="lede">What actually happened when AI met the real world: in courts, hospitals, workplaces, and public services. Every case researched from primary sources and graded on the strength of its evidence.</p>
+      <div class="stats">
+        {caseStats.map((s) => (
+          <div class="screen-violet crt soft"><div class="v-num glowp" style="font-size: 38px; line-height: 1;">{s.n}</div><div class="v-label">{s.label}</div></div>
+        ))}
+      </div>
+      <div class="cta mono">READ ABOUT THE LIBRARY →</div>
+    </div>
+    <div class="files" aria-hidden="true">
+      <div class="f f1"></div>
+      <div class="f f2"></div>
+      <div class="f f3">
+        <div class="fhead">CASE FILE 022</div>
+        <div class="bar" style="width: 90%"></div>
+        <div class="bar" style="width: 70%"></div>
+        <div class="line" style="width: 95%; margin-top: 18px"></div>
+        <div class="line" style="width: 88%"></div>
+        <div class="line" style="width: 92%"></div>
+        <div class="line" style="width: 60%"></div>
+        <div class="stamp"><span>GRADE</span><b>A</b></div>
+      </div>
+    </div>
+  </a>
+</div>
+
+<style>
+  .panels { display: grid; gap: 36px; }
+  .panel {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 40px 56px; text-decoration: none; color: var(--ink);
+    background: var(--surface); border: 2px solid var(--ink); border-radius: 28px; padding: clamp(24px, 4vw, 52px);
+    box-shadow: inset 0 2px 0 rgba(255,255,255,.5), 10px 10px 0 var(--ink), 0 30px 50px var(--shadow);
+  }
+  .panel:hover { color: var(--ink); }
+  .panel-mint { background: var(--mint); color: var(--mint-ink); flex-wrap: wrap-reverse; }
+  .panel-mint:hover { color: var(--mint-ink); }
+  .ptext { flex: 1 1 360px; min-width: 0; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .ptext h3 { margin: 20px 0 0; font-weight: 800; font-size: clamp(34px, 4vw, 56px); line-height: 1; letter-spacing: -1.5px; }
+  .lede { margin: 18px 0 0; font-size: 21px; line-height: 1.45; max-width: 44ch; }
+  .for { margin: 12px 0 0; font-size: 17px; color: var(--muted); }
+  .gauge-head { display: flex; justify-content: space-between; font-size: 12px; margin: 26px 0 8px; max-width: 520px; }
+  .gauge { display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); gap: 4px; padding: 6px; background: #0B0E12; border-radius: 8px; box-shadow: inset 0 2px 6px rgba(0,0,0,.6); max-width: 520px; }
+  .gauge span { height: 16px; border-radius: 3px; background: #2A2F3A; }
+  .gauge span.on { background: #FFB000; box-shadow: 0 0 8px rgba(255,176,0,.7); }
+  .cta { margin-top: 24px; font-weight: 600; font-size: 14px; color: var(--orange-text); }
+  .panel-mint .cta { color: inherit; }
+  .stats { margin-top: 26px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; max-width: 460px; }
+
+  .book { flex: 0 0 auto; position: relative; width: 220px; height: 300px; margin: 0 auto; transform: perspective(900px) rotateY(-18deg) rotateZ(-2deg); }
+  .pages { position: absolute; right: -14px; top: 8px; bottom: 8px; width: 16px; background: repeating-linear-gradient(to bottom, #F8F1E3 0 2px, #DEDBD3 2px 3px); border: 2px solid #14161B; border-left: none; border-radius: 0 4px 4px 0; }
+  .cover { position: absolute; inset: 0; background: linear-gradient(135deg, #24466E, #16304F); border: 2px solid #14161B; border-radius: 4px 10px 10px 4px; box-shadow: 18px 22px 30px rgba(0,0,0,.35); overflow: hidden; }
+  .spine { position: absolute; left: 0; top: 0; bottom: 0; width: 18px; background: linear-gradient(90deg, #0F2238, #1D3A5C); border-right: 2px solid #0B1828; }
+  .band1 { position: absolute; left: 18px; right: 0; top: 54px; height: 16px; background: #B4532A; }
+  .band2 { position: absolute; left: 18px; right: 0; top: 74px; height: 6px; background: #3E8C84; }
+  .btitle { position: absolute; left: 38px; right: 18px; top: 104px; font-family: var(--font-display); font-weight: 800; font-size: 27px; line-height: 1.02; color: #F5ECDC; }
+  .bauthor { position: absolute; left: 38px; bottom: 24px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; color: #E3B24A; }
+
+  .files { flex: 0 0 auto; position: relative; width: 300px; height: 300px; margin: 0 auto; }
+  .f { position: absolute; width: 230px; height: 250px; border: 2px solid #14161B; border-radius: 6px; box-shadow: 0 14px 24px rgba(0,0,0,.25); }
+  .f1 { left: 30px; top: 30px; background: #E2E5E9; transform: rotate(-12deg); }
+  .f2 { left: 38px; top: 22px; background: #EEF0F2; transform: rotate(-4deg); }
+  .f3 { left: 46px; top: 16px; background: #FFFFFF; transform: rotate(5deg); padding: 18px; color: #14161B; box-shadow: 0 20px 34px rgba(0,0,0,.3); }
+  .fhead { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; border-bottom: 2px solid #14161B; padding-bottom: 8px; }
+  .bar { margin-top: 10px; height: 8px; background: #14161B; border-radius: 2px; opacity: .8; }
+  .line { margin-top: 7px; height: 5px; background: #A3A8B0; border-radius: 2px; }
+  .stamp { position: absolute; right: 14px; bottom: 16px; width: 84px; height: 84px; border-radius: 50%; border: 4px solid #B8401A; color: #B8401A; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: rotate(-16deg); font-family: var(--font-mono); font-weight: 600; }
+  .stamp span { font-size: 9px; letter-spacing: 2px; }
+  .stamp b { font-family: var(--font-display); font-weight: 800; font-size: 36px; line-height: 1; }
+
+  @media (max-width: 480px) {
+    .files { transform: scale(.85); margin: -20px auto; }
+    .stats { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .stats :global(.v-label) { font-size: 15px; }
+  }
+</style>

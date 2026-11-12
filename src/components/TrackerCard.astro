@@ -1,0 +1,19 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { project: CollectionEntry<'projects'>; }
+const { project } = Astro.props;
+const p = project.data;
+---
+<a href={`/work/${project.id}/`} class="tracker lift">
+  <div class="bezel">
+    <div class="screen-violet crt soft">
+      <div class="v-label">{p.statLabel}</div>
+      <div class="v-num glowp">{p.stat}</div>
+    </div>
+  </div>
+  <div style="flex: 1 1 200px; min-width: 0;">
+    <div class="when"><span class="lamp">UPDATED WEEKLY</span></div>
+    <h3>{p.title}</h3>
+    <p>{p.summary}</p>
+  </div>
+</a>
