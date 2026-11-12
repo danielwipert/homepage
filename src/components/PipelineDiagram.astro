@@ -93,7 +93,7 @@ const tagFor = (x: Node, i: number) => (x.kind === 'io' ? (i === 0 ? 'IN' : i ==
   /* kind colors */
   .sw.io, .nd.io { --k: #F5F3EE; --kt: #14161B; }
   .sw.step, .nd.step { --k: var(--mustard); --kt: #14161B; }
-  .sw.code, .nd.code { --k: var(--teal); --kt: #FFFFFF; }
+  .sw.code, .nd.code { --k: #176B63; --kt: #FFFFFF; }
   .sw.model, .nd.model { --k: #4A2A85; --kt: #F4EEFF; }
   .sw.check, .nd.check { --k: var(--orange); --kt: #14161B; }
   .sw { background: var(--k); }
@@ -111,7 +111,7 @@ const tagFor = (x: Node, i: number) => (x.kind === 'io' ? (i === 0 ? 'IN' : i ==
   }
 
   .nd { position: relative; display: flex; flex-direction: column; gap: 4px; background: var(--surface); color: var(--ink); border: 2px solid var(--ink); border-radius: 12px; padding: 30px 12px 12px; box-shadow: 4px 4px 0 var(--ink); overflow: hidden; min-height: 108px; }
-  .nd .tag { position: absolute; left: 0; right: 0; top: 0; padding: 4px 10px; font-size: 9.5px; letter-spacing: 1.5px; background: var(--k); color: var(--kt); border-bottom: 2px solid var(--ink); }
+  .nd .tag { position: absolute; left: 0; right: 0; top: 0; padding: 4px 10px; font-size: 10px; letter-spacing: 1.5px; background: var(--k); color: var(--kt); border-bottom: 2px solid var(--ink); }
   .nd .lbl { font-family: var(--font-display); font-weight: 800; font-size: 16px; line-height: 1.15; }
   .nd .sub { font-size: 14px; line-height: 1.3; color: var(--muted); }
   .nd.small { min-height: 0; padding-top: 26px; }
@@ -119,7 +119,7 @@ const tagFor = (x: Node, i: number) => (x.kind === 'io' ? (i === 0 ? 'IN' : i ==
   .nd.io { background: color-mix(in srgb, var(--surface) 80%, #F2B33D 20%); }
 
   .par { display: flex; flex-direction: column; gap: 8px; padding: 10px; border: 2px dashed color-mix(in srgb, var(--ink) 40%, transparent); border-radius: 14px; }
-  .plabel { font-size: 9.5px; letter-spacing: 1.5px; color: var(--muted); }
+  .plabel { font-size: 10px; letter-spacing: 1.5px; color: var(--muted); }
 
   .fail { margin: 0; font-size: 11px; line-height: 1.35; letter-spacing: .5px; color: var(--orange-text); }
 

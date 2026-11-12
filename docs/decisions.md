@@ -65,6 +65,10 @@ All decisions made on 2026-11-11, one gate at a time.
 |---|---|---|---|
 | 38 | Writing library built ahead of the LinkedIn export: importer, Start Here shelf, search (Pagefind), topic pages, year archive, RSS | Ready the moment the export arrives | `scripts/import_linkedin.py`, `src/pages/writing/` |
 | 39 | Live numbers: a GitHub Action reads both trackers every Monday and commits `src/data/live.json`; the commit triggers a Cloudflare rebuild | JSON-in-repo, auditable, keeps last week's numbers if a source fails | `.github/workflows/refresh-live.yml`, `scripts/refresh_live.py` |
+| 40 | Interactive homepage terminal: boot sequence once per visit, typed commands, quick keys for phones | The site's signature moment | `src/scripts/terminal.ts` |
+| 41 | Animated how-it-works diagrams on all six main project pages | Makes each system click instantly | `src/data/diagrams.ts` |
+| 42 | Custom share cards per project and post, generated at build | Better LinkedIn previews | `src/lib/og.ts` |
+| 43 | Small touches: CRT page transitions, reading progress bar, update stamp, skip link, print styles; passes automated accessibility scan (WCAG A/AA) in light and dark | Polish and access | `global.css`, Base layout |
 
 ## Open items
 
