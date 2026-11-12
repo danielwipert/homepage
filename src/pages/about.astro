@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Plate from '../components/Plate.astro';
+import Hedcut from '../components/Hedcut.astro';
 import { roles, education, certifications, licenses } from '../data/cv';
 import { SITE } from '../site';
 
@@ -12,7 +13,7 @@ const profile = {
 ---
 <Base title="About" description="Daniel Wipert: fifteen years running operations at Bonobos, Etsy, Summersalt and Bodily, now building AI systems that can't afford to be wrong." jsonLd={profile} current="about">
   <section class="wrap top">
-    <div class="photo" role="img" aria-label="Photo of Daniel Wipert, coming soon"><span class="mono">PHOTO</span></div>
+    <Hedcut />
     <div class="intro-text">
       <p class="mono kicker">C:\DANIEL&gt; WHOAMI</p>
       <h1>About</h1>
@@ -64,7 +65,6 @@ const profile = {
 
 <style>
   .top { padding-top: 72px; display: flex; flex-wrap: wrap; align-items: center; gap: 32px 48px; }
-  .photo { flex: 0 0 auto; width: 180px; height: 180px; border-radius: 50%; border: 2px solid var(--ink); background: radial-gradient(circle at 35% 30%, #F49A5E, var(--orange) 60%, #B84A18); box-shadow: 8px 8px 0 var(--ink); display: flex; align-items: center; justify-content: center; color: #14161B; font-size: 12px; }
   .intro-text { flex: 1 1 400px; min-width: 0; }
   .kicker { margin: 0; font-size: 13px; letter-spacing: 3px; color: var(--muted); }
   h1 { margin: 10px 0 0; font-weight: 800; font-size: clamp(48px, 7vw, 96px); line-height: .95; letter-spacing: -2.5px; }
