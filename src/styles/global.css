@@ -1,5 +1,5 @@
 /* danielwipert.com design tokens: "editorial lab", from the approved mockup.
-   Light = Daylight, dark = Night shift (follows the visitor's device). */
+   Light only ("Daylight"), on every device; dark mode removed Nov 2026. */
 
 :root {
   --bg: #F5F3EE;
@@ -30,26 +30,6 @@
   --wrap: 1240px;
   --gutter: clamp(16px, 4vw, 48px);
   color-scheme: light;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0F1115;
-    --surface: #191C23;
-    --ink: #EEF0F3;
-    --muted: #A7ADB8;
-    --orange: #FF7A3D;
-    --orange-hi: #FF9A66;
-    --orange-text: #FF9A66;
-    --mustard: #F5BF4F;
-    --teal: #3BB3A6;
-    --dot: rgba(255, 255, 255, 0.05);
-    --panel: #232833;
-    --mint: #141A1F;
-    --mint-ink: #EEF0F3;
-    --shadow: rgba(0, 0, 0, 0.5);
-    color-scheme: dark;
-  }
 }
 
 *, *::before, *::after { box-sizing: border-box; }

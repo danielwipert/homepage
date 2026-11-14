@@ -69,6 +69,7 @@ All decisions made on 2026-11-11, one gate at a time.
 | 41 | Animated how-it-works diagrams on all six main project pages | Makes each system click instantly | `src/data/diagrams.ts` |
 | 42 | Custom share cards per project and post, generated at build | Better LinkedIn previews | `src/lib/og.ts` |
 | 43 | Small touches: CRT page transitions, reading progress bar, update stamp, skip link, print styles; passes automated accessibility scan (WCAG A/AA) in light and dark | Polish and access | `global.css`, Base layout |
+| 44 | Light theme only on every device; automatic dark mode removed (2026-11-14) | Dan prefers the light version; dark looked off on his phone | `src/styles/global.css`, `src/layouts/Base.astro` |
 
 ## Open items
 
