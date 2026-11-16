@@ -77,6 +77,7 @@ All decisions made on 2026-11-11, one gate at a time.
 | 49 | 306 published, 62 left as unpublished drafts (article announcements, certificates, very short posts, film, a 2016 ad, one duplicate) | Library stays substantive; drafts can be flipped on later | `src/content/posts/` |
 | 50 | Import fixes: LinkedIn's per-line quotes removed, "fancy" bold letters turned into plain text, duplicates matched by LinkedIn link | Clean text, readable by search engines and screen readers | `scripts/import_linkedin.py` |
 | 51 | "Start here" shelf: AI Operations Management, Feral AI: An Origin Story, Chorus AI framework, AI Governance Has a Cost Problem, Liberating Agentic AI Through Limitation, Start Here... What is AI, really? (2026-11-15) | Dan's big original ideas, lined up with the Work page | `featured:` in each post |
+| 52 | Article pages get a New Yorker-style magazine layout: centered masthead (topic, headline, byline, double rule), margin column (date, reading time, topics, LinkedIn), IBM Plex Serif text, Fraunces headlines, orange first letter with small-caps first line, ❦ section ornaments, ■ end mark (2026-11-15) | Dan loves the New Yorker, the FT, and IBM Plex; wanted the pages jazzed up | `src/pages/writing/[slug].astro` |
 
 ## Open items
 
