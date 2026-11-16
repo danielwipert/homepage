@@ -37,17 +37,9 @@ Microsoft patched the hole before anyone used it in the wild, and the employee n
 
 The real catastrophe doesn't happen just because an AI is gullible. It happens when you hand that gullible machine the keys to the kingdom. Security writer Simon Willison calls this the **Lethal Trifecta**, the risky combination of:
 
--
-
-Access to private data
-
--
-
-Exposure to untrusted content
-
--
-
-Ability to send information out
+- Access to private data
+- Exposure to untrusted content
+- Ability to send information out
 
 Think back to our accounts payable clerk: having the same person open the outside mail, keep the confidential customer files, and hold the company checkbook is an invitation to disaster. Any one of those jobs is harmless on its own, but combining all three in one person is how a fake letter turns into a stolen wire transfer.
 

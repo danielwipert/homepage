@@ -22,4 +22,3 @@ Where’s the caution?
 • Capital Expenditures continue to be depressed, stuck in negative territory since Feb 2025.  
 • Hiring has stalled: employment levels were flat in July, and plans to add staff in the months ahead have been pulled back.  
   • But wages are still going up, probably to keep talent, and wages are expected to rise, 44% of companies expect to pay their people more in 6 months.  
--

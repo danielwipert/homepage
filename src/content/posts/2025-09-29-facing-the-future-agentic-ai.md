@@ -39,22 +39,8 @@ In my next essay, I’ll explore how to build and organize teams of AI agents to
 
 Want to learn more about Agentic AI? Here are some easy to further resources that will help you understand this emerging field of Artificial Intelligence.
 
--
-
-Harvard Business Review. (2024, December). *What is agentic AI, and how will it change work?* Harvard Business Review. [https://hbr.org/2024/12/what-is-agentic-ai-and-how-will-it-change-work](https://hbr.org/2024/12/what-is-agentic-ai-and-how-will-it-change-work)
-
--
-
-McKinsey & Company. (2025, February). *One year of agentic AI: Six lessons from the people doing the work.* McKinsey & Company. [https://www.mckinsey.com/capabilities/quantumblack/our-insights/one-year-of-agentic-ai-six-lessons-from-the-people-doing-the-work](https://www.mckinsey.com/capabilities/quantumblack/our-insights/one-year-of-agentic-ai-six-lessons-from-the-people-doing-the-work)
-
--
-
-McKinsey & Company. (2024, November). *Why agents are the next frontier of generative AI.* McKinsey & Company. [https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/why-agents-are-the-next-frontier-of-generative-ai](https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/why-agents-are-the-next-frontier-of-generative-ai)
-
--
-
-Sun, X., Zhang, Y., Wang, L., & Li, J. (2025). AgentAI: A comprehensive survey on autonomous agents. *Expert Systems with Applications, 259*, 125026. [https://www.sciencedirect.com/science/article/pii/S0957417425020238](https://www.sciencedirect.com/science/article/pii/S0957417425020238)
-
--
-
-Zhao, H., Liu, M., & Chen, Y. (2025). AI agents vs. agentic AI: A conceptual taxonomy, applications and challenges. *arXiv preprint arXiv:2505.10468.* [https://arxiv.org/abs/2505.10468](https://arxiv.org/abs/2505.10468)
+- Harvard Business Review. (2024, December). *What is agentic AI, and how will it change work?* Harvard Business Review. [https://hbr.org/2024/12/what-is-agentic-ai-and-how-will-it-change-work](https://hbr.org/2024/12/what-is-agentic-ai-and-how-will-it-change-work)
+- McKinsey & Company. (2025, February). *One year of agentic AI: Six lessons from the people doing the work.* McKinsey & Company. [https://www.mckinsey.com/capabilities/quantumblack/our-insights/one-year-of-agentic-ai-six-lessons-from-the-people-doing-the-work](https://www.mckinsey.com/capabilities/quantumblack/our-insights/one-year-of-agentic-ai-six-lessons-from-the-people-doing-the-work)
+- McKinsey & Company. (2024, November). *Why agents are the next frontier of generative AI.* McKinsey & Company. [https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/why-agents-are-the-next-frontier-of-generative-ai](https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/why-agents-are-the-next-frontier-of-generative-ai)
+- Sun, X., Zhang, Y., Wang, L., & Li, J. (2025). AgentAI: A comprehensive survey on autonomous agents. *Expert Systems with Applications, 259*, 125026. [https://www.sciencedirect.com/science/article/pii/S0957417425020238](https://www.sciencedirect.com/science/article/pii/S0957417425020238)
+- Zhao, H., Liu, M., & Chen, Y. (2025). AI agents vs. agentic AI: A conceptual taxonomy, applications and challenges. *arXiv preprint arXiv:2505.10468.* [https://arxiv.org/abs/2505.10468](https://arxiv.org/abs/2505.10468)

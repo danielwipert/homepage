@@ -19,17 +19,9 @@ Before we dive into when to use each method, let's do a quick recap. **Prompting
 
 ***How Fine-Tuning Works:***
 
-1.
-
-**Start with a base model:** You take an existing model that already understands general language, grammar, and reasoning.
-
-1.
-
-**Feed it targeted examples:** You train it on hundreds or thousands of specialized pairs (e.g., legal contracts and their summaries, or customer support logs and ideal agent responses).
-
-1.
-
-**Adjust internal weights:** The model updates its internal connections to internalize those patterns, jargon, or formatting rules directly into its memory.
+1. **Start with a base model:** You take an existing model that already understands general language, grammar, and reasoning.
+1. **Feed it targeted examples:** You train it on hundreds or thousands of specialized pairs (e.g., legal contracts and their summaries, or customer support logs and ideal agent responses).
+1. **Adjust internal weights:** The model updates its internal connections to internalize those patterns, jargon, or formatting rules directly into its memory.
 
 ### What Tool to Use and When
 
@@ -37,49 +29,22 @@ Imagine you run a fast-growing online clothing store called TrendCo. Here is how
 
 ***Simple Prompting* (Direct Instructions)**
 
--
-
-**The Scenario**: You need to write a quick promotional email for a surprise summer sale happening tomorrow.
-
--
-
-**Why Prompting:** You don't need company files or specialized coding. You just need the AI to write engaging copy right now using its general writing skills.
-
--
-
-**What You Say:** "Write a fun, 3-sentence email announcing a 20% off summer flash sale. Keep the tone light and energetic."
+- **The Scenario**: You need to write a quick promotional email for a surprise summer sale happening tomorrow.
+- **Why Prompting:** You don't need company files or specialized coding. You just need the AI to write engaging copy right now using its general writing skills.
+- **What You Say:** "Write a fun, 3-sentence email announcing a 20% off summer flash sale. Keep the tone light and energetic."
 
 ***RAG *(Looking Up Live / Private Facts)**
 
--
-
-**The Scenario**: A customer chats in asking, "Where is my order #4092, and what is your return policy for swimwear?"
-
--
-
-**Why RAG:** The AI’s general training doesn't know about order #4092 or your specific return policy. You can't train the AI on orders every second, so it needs to look up the live facts in your inventory database and policy documents before answering.
-
--
-
-How It Works: The system searches your database for order #4092 (Status: Shipped) and your return document (Swimwear: 14 days with tags), feeds those facts into the AI, and the AI replies accurately to the customer.
+- **The Scenario**: A customer chats in asking, "Where is my order #4092, and what is your return policy for swimwear?"
+- **Why RAG:** The AI’s general training doesn't know about order #4092 or your specific return policy. You can't train the AI on orders every second, so it needs to look up the live facts in your inventory database and policy documents before answering.
+- How It Works: The system searches your database for order #4092 (Status: Shipped) and your return document (Swimwear: 14 days with tags), feeds those facts into the AI, and the AI replies accurately to the customer.
 
 ***Fine-Tuning *(Teaching a Strict Habit or Style)**
 
--
-
-**The Scenario**: You want your customer service chatbot to sound 100% like your brand’s quirky personality (think playful, casual, and using trendy slang) instead of sounding like a polite corporate robot.
-
--
-
-**The Problem with Normal AI**: Standard AI defaults to sounding like a neutral call-center representative: "Thank you for reaching out. We apologize for the delay. Your package is currently in transit."
-
--
-
-**How Fine-Tuning Fixes It**: You train the AI on hundreds of examples of how your real team talks to customers.
-
--
-
-**The Result**: The model naturally learns the exact personality, so it automatically responds like this without needing any extra instructions: "Oh no! Your order is taking a little detour, but don't worry, it’s officially on the move and heading your way!"
+- **The Scenario**: You want your customer service chatbot to sound 100% like your brand’s quirky personality (think playful, casual, and using trendy slang) instead of sounding like a polite corporate robot.
+- **The Problem with Normal AI**: Standard AI defaults to sounding like a neutral call-center representative: "Thank you for reaching out. We apologize for the delay. Your package is currently in transit."
+- **How Fine-Tuning Fixes It**: You train the AI on hundreds of examples of how your real team talks to customers.
+- **The Result**: The model naturally learns the exact personality, so it automatically responds like this without needing any extra instructions: "Oh no! Your order is taking a little detour, but don't worry, it’s officially on the move and heading your way!"
 
 ### What Goes Wrong
 

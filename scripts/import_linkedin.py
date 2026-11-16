@@ -214,6 +214,7 @@ class HtmlToMd(HTMLParser):
         self.out: list[str] = []
         self.href: list[str] = []
         self.list_stack: list[str] = []
+        self.in_li = 0  # LinkedIn puts <p> inside <li>; don't break the bullet apart
 
     @classmethod
     def convert(cls, html_text: str) -> str:
@@ -227,7 +228,8 @@ class HtmlToMd(HTMLParser):
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
         if tag in ("p", "div"):
-            self.out.append("\n\n")
+            if not self.in_li:
+                self.out.append("\n\n")
         elif tag in ("h1", "h2", "h3"):
             self.out.append("\n\n## " if tag != "h3" else "\n\n### ")
         elif tag == "br":
@@ -240,6 +242,7 @@ class HtmlToMd(HTMLParser):
             self.list_stack.append(tag)
             self.out.append("\n")
         elif tag == "li":
+            self.in_li += 1
             self.out.append("\n- " if not self.list_stack or self.list_stack[-1] == "ul" else "\n1. ")
         elif tag == "blockquote":
             self.out.append("\n\n> ")
@@ -252,7 +255,11 @@ class HtmlToMd(HTMLParser):
                 self.out.append(f"\n\n*[Image: {alt}]*\n\n")
 
     def handle_endtag(self, tag):
-        if tag in ("p", "div", "h1", "h2", "h3", "blockquote"):
+        if tag in ("p", "div") and self.in_li:
+            pass
+        elif tag == "li":
+            self.in_li = max(0, self.in_li - 1)
+        elif tag in ("p", "div", "h1", "h2", "h3", "blockquote"):
             self.out.append("\n\n")
         elif tag in ("strong", "b"):
             self.out.append("**")

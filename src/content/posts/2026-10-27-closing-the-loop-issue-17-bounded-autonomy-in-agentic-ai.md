@@ -23,49 +23,23 @@ When you are thinking about how to create guardrails for your Agentic AI and age
 
 So let's talk about what goes wrong with autonomous agents:
 
--
-
-**Runaway Workflow **– This is what happens when you have no Stop Condition, *a rule created before the agent starts, that tells it when to quit on its own. The agent does not decide it’s finished; the rule does*. A runaway workflow is what happens when there is no guardrail. The drop-off and damage will entirely depend on the agent’s access, power, and instructions. It could be a grass median or a sheer cliff face. But the safety mechanism is the same. Create a massive brick wall your agent can never breach.
-
--
-
-**Tool Misuse** – Even if you have a stop condition guardrail, you can easily give an agent too much leeway. Think of a car crossing a flat median and driving in the wrong direction. Bad news. This is a classic access control issue. You only want your agent to be able to access certain areas of your data and you only want it to be able to do certain actions.
+- **Runaway Workflow **– This is what happens when you have no Stop Condition, *a rule created before the agent starts, that tells it when to quit on its own. The agent does not decide it’s finished; the rule does*. A runaway workflow is what happens when there is no guardrail. The drop-off and damage will entirely depend on the agent’s access, power, and instructions. It could be a grass median or a sheer cliff face. But the safety mechanism is the same. Create a massive brick wall your agent can never breach.
+- **Tool Misuse** – Even if you have a stop condition guardrail, you can easily give an agent too much leeway. Think of a car crossing a flat median and driving in the wrong direction. Bad news. This is a classic access control issue. You only want your agent to be able to access certain areas of your data and you only want it to be able to do certain actions.
 
 ***Real Case - Tool Misuse**** - PocketOS, April 2026*
 
--
+- A Cursor coding agent was fixing a credential mismatch in a staging environment. It had access to a Railway API token that was scoped far wider than the task: it could issue destructive commands against production. More access than it should have.
+- It deleted a storage volume to resolve the issue, guessing at the command’s effect without checking which environments shared that volume. No check was done. No confirmation step was required. It just acted.
+- The deleted storage volume held the production database and the backups; both were gone in seconds. PocketOS spent two days recovering the lost data, which they were lucky to be able to do.
 
-A Cursor coding agent was fixing a credential mismatch in a staging environment. It had access to a Railway API token that was scoped far wider than the task: it could issue destructive commands against production. More access than it should have.
-
--
-
-It deleted a storage volume to resolve the issue, guessing at the command’s effect without checking which environments shared that volume. No check was done. No confirmation step was required. It just acted.
-
--
-
-The deleted storage volume held the production database and the backups; both were gone in seconds. PocketOS spent two days recovering the lost data, which they were lucky to be able to do.
-
--
-
-**Cost Spike **– This one is probably the most top of mind for business leaders. AI went from an all-you-can-eat buffet to a full IRS audit in about 6 months. Tokens are the new currency, and you better have a meter to know your AI spend. What has happened pretty much at every corporation over the last year is a rush to adopt AI and then shock when the invoice hits. From Fortune 20 companies to your mom and pop ecommerce stores. Everyone is dealing with sticker shock. The controls here are actually the easiest. This is exactly like the company card. You put daily, weekly, and monthly limits on your AI spending for every single person and agent. Maybe the idea is simple, but the execution can be hard. Just never let the token meter run without a stop condition. Live by that rule, and you will be fine. But put in place before a single prompt or automation is made.
-
--
-
-**No Red Flags **- Think of your job. What happens if something bad happens and it feels bigger than you or your role. You escalate the issue to your manager. I had to do this probably 10 times a week in most of my roles (startups!). AI agents need to have the same option. If something is a big deal; the agent needs an escalation path before it acts. It needs to be able to raise a red flag. If there is no escalation logic or path, then the agent is going to act, because it has been told to act. It is going to do the wrong thing. Not all checks on autonomy need to be steel guardrails. Sometimes they need to be a short pause for a human in the loop to review and then put the agent back into action.
+- **Cost Spike **– This one is probably the most top of mind for business leaders. AI went from an all-you-can-eat buffet to a full IRS audit in about 6 months. Tokens are the new currency, and you better have a meter to know your AI spend. What has happened pretty much at every corporation over the last year is a rush to adopt AI and then shock when the invoice hits. From Fortune 20 companies to your mom and pop ecommerce stores. Everyone is dealing with sticker shock. The controls here are actually the easiest. This is exactly like the company card. You put daily, weekly, and monthly limits on your AI spending for every single person and agent. Maybe the idea is simple, but the execution can be hard. Just never let the token meter run without a stop condition. Live by that rule, and you will be fine. But put in place before a single prompt or automation is made.
+- **No Red Flags **- Think of your job. What happens if something bad happens and it feels bigger than you or your role. You escalate the issue to your manager. I had to do this probably 10 times a week in most of my roles (startups!). AI agents need to have the same option. If something is a big deal; the agent needs an escalation path before it acts. It needs to be able to raise a red flag. If there is no escalation logic or path, then the agent is going to act, because it has been told to act. It is going to do the wrong thing. Not all checks on autonomy need to be steel guardrails. Sometimes they need to be a short pause for a human in the loop to review and then put the agent back into action.
 
 ***Real Case - Escalation**** - Amazon, March 2026*
 
--
-
-Amazon’s retail site had several high-severity outages in one week. One ran six hours and blocked checkout, sign-in, and pricing.
-
--
-
-Amazon’s own account: not bad AI code. An engineer acted on advice from an AI agent that it had incorrectly drawn on an outdated internal wiki. Internal documents called it a “trend of incidents” tied to “Gen-AI assisted changes.”
-
--
-
-The fix: senior-engineer review is now required for AI-assisted changes. Human oversight added back in as a soft guardrail
+- Amazon’s retail site had several high-severity outages in one week. One ran six hours and blocked checkout, sign-in, and pricing.
+- Amazon’s own account: not bad AI code. An engineer acted on advice from an AI agent that it had incorrectly drawn on an outdated internal wiki. Internal documents called it a “trend of incidents” tied to “Gen-AI assisted changes.”
+- The fix: senior-engineer review is now required for AI-assisted changes. Human oversight added back in as a soft guardrail
 
 These four failures all have one thing in common. No rules were created, no guardrails were set up. The AI was let loose, not given proper guidance, and never given a command to stop. The more power and access the AI has, the more complex, dynamic, and severe the guardrails need to be.
 

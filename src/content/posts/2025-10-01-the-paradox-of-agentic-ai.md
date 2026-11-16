@@ -57,22 +57,8 @@ What takes shape is not a lone super-agent, but a system of convergent intellige
 
 For further reading on the future of Multi-Agent Agentic AI, check out these resources:
 
--
-
-"What is a Multi-Agent System?" *IBM*, 2024, [www.ibm.com/think/topics/multiagent-system](http://www.ibm.com/think/topics/multiagent-system).
-
--
-
-"What is a Multi Agent System." *Relevance AI*, [relevanceai.com/learn/what-is-a-multi-agent-system](http://relevanceai.com/learn/what-is-a-multi-agent-system).
-
--
-
-"Everything You Need to Know About Multi AI Agents in 2025: Explanation, Examples and Challenges." *Springs*, 10 Feb. 2025, [springsapps.com/knowledge/everything-you-need-to-know-about-multi-ai-agents-in-2024-explanation-examples-and-challenges](http://springsapps.com/knowledge/everything-you-need-to-know-about-multi-ai-agents-in-2024-explanation-examples-and-challenges).
-
--
-
-"How to Ensure the Safety of Modern AI Agents and Multi-Agent Systems." *World Economic Forum*, 2025, [www.weforum.org/stories/2025/01/ai-agents-multi-agent-systems-safety/](http://www.weforum.org/stories/2025/01/ai-agents-multi-agent-systems-safety/).
-
--
-
-"Don't Build Multi-Agents." *Cognition AI*, [cognition.ai/blog/dont-build-multi-agents](http://cognition.ai/blog/dont-build-multi-agents).
+- "What is a Multi-Agent System?" *IBM*, 2024, [www.ibm.com/think/topics/multiagent-system](http://www.ibm.com/think/topics/multiagent-system).
+- "What is a Multi Agent System." *Relevance AI*, [relevanceai.com/learn/what-is-a-multi-agent-system](http://relevanceai.com/learn/what-is-a-multi-agent-system).
+- "Everything You Need to Know About Multi AI Agents in 2025: Explanation, Examples and Challenges." *Springs*, 10 Feb. 2025, [springsapps.com/knowledge/everything-you-need-to-know-about-multi-ai-agents-in-2024-explanation-examples-and-challenges](http://springsapps.com/knowledge/everything-you-need-to-know-about-multi-ai-agents-in-2024-explanation-examples-and-challenges).
+- "How to Ensure the Safety of Modern AI Agents and Multi-Agent Systems." *World Economic Forum*, 2025, [www.weforum.org/stories/2025/01/ai-agents-multi-agent-systems-safety/](http://www.weforum.org/stories/2025/01/ai-agents-multi-agent-systems-safety/).
+- "Don't Build Multi-Agents." *Cognition AI*, [cognition.ai/blog/dont-build-multi-agents](http://cognition.ai/blog/dont-build-multi-agents).

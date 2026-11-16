@@ -15,17 +15,9 @@ Customer Sentiment is at an historical low. The average stretching back over 70 
 
 University Of Michigan Consumer Sentiment Index By Political Affiliation (2024–2025)
 
--
-
-Republicans are very happy and confident about the economy with a current sentiment of **98**. Notice the massive swing from Sept 2024 to Nov 2024. I wonder what happened?
-
--
-
-Democrats are deeply pessimistic about the economy: Their sentiment sits at just **42**, barely half that of Republicans. Their sentiment was in the 90s before the 2024 election, and then it tanked when Trump won.
-
--
-
-Independents have remained pessimistic. They did not swing much during the electoral season but once Trump took office in Jan 2025 their sentiment tanked as well. They are recovering a bit, but they are not at all happy about the economy.
+- Republicans are very happy and confident about the economy with a current sentiment of **98**. Notice the massive swing from Sept 2024 to Nov 2024. I wonder what happened?
+- Democrats are deeply pessimistic about the economy: Their sentiment sits at just **42**, barely half that of Republicans. Their sentiment was in the 90s before the 2024 election, and then it tanked when Trump won.
+- Independents have remained pessimistic. They did not swing much during the electoral season but once Trump took office in Jan 2025 their sentiment tanked as well. They are recovering a bit, but they are not at all happy about the economy.
 
 When we dip our toe into the actual data, the headlines become very murky very quickly. Yes, Customer Sentiment is terrible, but it is extremely divided along political lines. Republicans think everything is great, even with the insanity of Trump's economic "policies." In fact, Republicans are getting more and more optimistic. Republicans are expecting things to get better, with a Customer Expectation index of 105. The Democrats are expecting things to get even worse, with an Expectation score of 33. Independents are similarly pessimistic.
 
@@ -37,25 +29,11 @@ Let's take a step back here. What does this really mean? It means that Democrats
 
 This [2015 paper by the San Francisco Federal Reserve](https://www.frbsf.org/wp-content/uploads/wp2016-19.pdf) looked directly at the University of Michigan survey and questioned how sentiment actually affects economic action. They made the following findings and conclusions:
 
--
-
-Consumer sentiment directly impacts spending behavior, not just economic confidence.
-
--
-
-A 1 standard deviation increase in sentiment correlates with a 2.3 percentage point rise in personal consumption expenditures (PCE) within a year.
-
--
-
-The effect is especially strong for discretionary spending (durable goods, travel, entertainment) which is more sensitive to consumer outlook.
-
--
-
-This reinforces the idea that consumer confidence acts as a throttle for economic activity: optimism accelerates spending, pessimism slows it down.
-
--
-
-Even when controlling for local economic conditions, higher sentiment predicts higher economic activity.
+- Consumer sentiment directly impacts spending behavior, not just economic confidence.
+- A 1 standard deviation increase in sentiment correlates with a 2.3 percentage point rise in personal consumption expenditures (PCE) within a year.
+- The effect is especially strong for discretionary spending (durable goods, travel, entertainment) which is more sensitive to consumer outlook.
+- This reinforces the idea that consumer confidence acts as a throttle for economic activity: optimism accelerates spending, pessimism slows it down.
+- Even when controlling for local economic conditions, higher sentiment predicts higher economic activity.
 
 The study's conclusion is clear: **customer sentiment is a legitimate economic driver and deserves close attention from both businesses and policymakers**.
 
@@ -65,20 +43,9 @@ The low-hanging fruit here is that you need to know the political affiliation of
 
 ### -- How integrate the bifurcated economic realities of your customers --
 
--
-
-**Segment by sentiment, not just demographics.** Traditional segmentation (age, income, geography) is no longer sufficient. You need to understand your customer’s *economic psychology*. Ask them - *Do they feel good about the world right now?* That will often predict their spending better than their salary.
-
--
-
-**Build sentiment-responsive campaigns.** GOP customers are in a confident, spend-ready mindset. Your messaging can be more aspirational, forward looking, and optimistic. Meanwhile, Democrat and Independent consumers are hunkered down. Emphasize value, reassurance, stability, and security in your messaging to them.
-
--
-
-**Use location as a proxy for political and sentiment mapping.** While not perfect, precise geographic segmentation can give you directional guidance on sentiment. The election data from 2024 should be your bible here. It can be found down to census tract. If you haven't segmented your customers by who they voted for in 2024, based on actual results, you are marketing to total strangers. You don't know them.
-
--
-
-**Monitor consumer sentiment like you monitor interest rates.** If you’re in a business that depends on discretionary spending (retail, travel, entertainment, services) sentiment is a leading indicator of demand. You can tell where your business will be strong or weak by closely tracking sentiment.
+- **Segment by sentiment, not just demographics.** Traditional segmentation (age, income, geography) is no longer sufficient. You need to understand your customer’s *economic psychology*. Ask them - *Do they feel good about the world right now?* That will often predict their spending better than their salary.
+- **Build sentiment-responsive campaigns.** GOP customers are in a confident, spend-ready mindset. Your messaging can be more aspirational, forward looking, and optimistic. Meanwhile, Democrat and Independent consumers are hunkered down. Emphasize value, reassurance, stability, and security in your messaging to them.
+- **Use location as a proxy for political and sentiment mapping.** While not perfect, precise geographic segmentation can give you directional guidance on sentiment. The election data from 2024 should be your bible here. It can be found down to census tract. If you haven't segmented your customers by who they voted for in 2024, based on actual results, you are marketing to total strangers. You don't know them.
+- **Monitor consumer sentiment like you monitor interest rates.** If you’re in a business that depends on discretionary spending (retail, travel, entertainment, services) sentiment is a leading indicator of demand. You can tell where your business will be strong or weak by closely tracking sentiment.
 
 Political affiliation drives consumer spending, which controls your business. But politics is as fickle as the wind. We know where Democrats, Independents, and GOP consumers are at right now. They won't be in the same place the morning after the 2026 midterms. The whole thing can change on a dime, just like it did in November 2024. Politics is not a mark of personality or values. Politics is a lens through which we experience our lived reality. Your business needs to take into account the different realities being lived by your customers.
