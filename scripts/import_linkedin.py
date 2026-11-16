@@ -21,6 +21,7 @@ import html
 import io
 import re
 import sys
+import unicodedata
 import zipfile
 from dataclasses import dataclass
 from datetime import datetime
@@ -111,8 +112,8 @@ def read_articles(ex: Export) -> list[Item]:
         items.append(Item(
             kind="linkedin-article",
             date=date,
-            title=title.strip(),
-            body_md=HtmlToMd.convert(body_html),
+            title=plain_letters(title).strip(),
+            body_md=plain_letters(HtmlToMd.convert(body_html)),
             source_url=link_m.group(1) if link_m else "",
         ))
     return items
@@ -134,8 +135,20 @@ def parse_date(s: str) -> str:
     return m.group(0) if m else datetime.now().strftime("%Y-%m-%d")
 
 
+def plain_letters(text: str) -> str:
+    """LinkedIn "bold" and "italic" are really math symbols (U+1D400 to U+1D7FF).
+    Turn them back into normal letters so search engines and screen readers can read them."""
+    return "".join(unicodedata.normalize("NFKC", ch) if 0x1D400 <= ord(ch) <= 0x1D7FF else ch for ch in text)
+
+
 def clean_post_text(text: str) -> str:
-    text = text.replace('""', '"').replace("\r\n", "\n").replace("\r", "\n")
+    text = plain_letters(text)
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
+    # LinkedIn wraps every line of a multi-line post in quotes: line one"\n""\n"line two.
+    # Undo that first, so the quotes don't end up in the post.
+    if '"\n"' in text:
+        text = text.replace('"\n"', "\n")
+    text = text.replace('""', '"')
     # LinkedIn exports mentions/hashtags in a few odd forms; normalize the common ones.
     text = re.sub(r"hashtag#(\w+)", r"#\1", text)
     text = re.sub(r"\{hashtag\|\\?#\|(\w+)\}", r"#\1", text)
@@ -304,10 +317,12 @@ def main() -> None:
 
     rows, written, skipped = [], 0, 0
     for item in items:
-        key = f"{item.date}-{slugify(item.title)}"
-        if (item.source_url and item.source_url in seen) or (POSTS_DIR / f"{key}.md").exists():
+        # Same LinkedIn link = same piece. (Two different posts can share a date and title.)
+        key = item.source_url or f"{item.date}-{slugify(item.title)}"
+        if key in seen:
             skipped += 1
             continue
+        seen.add(key)
         path = write_item(item)
         written += 1
         rows.append({

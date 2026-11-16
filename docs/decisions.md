@@ -70,6 +70,12 @@ All decisions made on 2026-11-11, one gate at a time.
 | 42 | Custom share cards per project and post, generated at build | Better LinkedIn previews | `src/lib/og.ts` |
 | 43 | Small touches: CRT page transitions, reading progress bar, update stamp, skip link, print styles; passes automated accessibility scan (WCAG A/AA) in light and dark | Polish and access | `global.css`, Base layout |
 | 44 | Light theme only on every device; automatic dark mode removed (2026-11-14) | Dan prefers the light version; dark looked off on his phone | `src/styles/global.css`, `src/layouts/Base.astro` |
+| 45 | LinkedIn import: 368 pieces read; Claude does a first pass, Dan checks on the live site (2026-11-15) | 368 is too many to sort by hand | `scripts/import_decisions.csv` |
+| 46 | Keep all 83 economy posts under "Economic reporting" | Shows the full history of how Dan reads data | `src/data/topics.ts` |
+| 47 | Keep all 7 posts with a political angle | Dan's real views, backed by data | `scripts/import_decisions.csv` |
+| 48 | Final 9 topics: Building reliable AI, AI economics, AI safety and governance, Models and the market, AI explained, Research notes, Work and careers, Retail and ecommerce, Economic reporting | Matches what Dan actually wrote | `src/data/topics.ts` |
+| 49 | 306 published, 62 left as unpublished drafts (article announcements, certificates, very short posts, film, a 2016 ad, one duplicate) | Library stays substantive; drafts can be flipped on later | `src/content/posts/` |
+| 50 | Import fixes: LinkedIn's per-line quotes removed, "fancy" bold letters turned into plain text, duplicates matched by LinkedIn link | Clean text, readable by search engines and screen readers | `scripts/import_linkedin.py` |
 
 ## Open items
 
@@ -78,5 +84,5 @@ All decisions made on 2026-11-11, one gate at a time.
 - Headshot photo for About (placeholder circle until then).
 - Review drafted case studies and About story.
 - Metro Economic Health Report repo link (if public).
-- Featured shelf picks and final topic list (after the LinkedIn import).
+- Featured shelf picks (topics settled, see #48).
 - Typefaces, colors, card style, headshot treatment (mockup step).

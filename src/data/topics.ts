@@ -1,14 +1,15 @@
-// Writing topics. Proposed list (spec 6.3); final list is set after the LinkedIn import.
+// Writing topics. Final list, set after the LinkedIn import (2026-11-15).
 // Each post carries one or two of these slugs in its `topics` field.
 export const TOPICS = {
-  'ai-operations': { name: 'AI operations', blurb: 'Running AI inside a real organization: process, ownership, and control.' },
+  'building-reliable-ai': { name: 'Building reliable AI', blurb: 'Closed loops, verification, and the systems I build at Chorus AI: Dossier, CASDAM, BRAG, and Jev.' },
   'ai-economics': { name: 'AI economics', blurb: 'What AI really costs, who pays, and how to make it pay for itself.' },
-  'ai-reliability': { name: 'AI reliability', blurb: 'Closed loops, verification, and AI that can be trusted with real work.' },
-  'models-and-market': { name: 'Models and the market', blurb: 'The labs, the models, open vs. closed, and where usage is going.' },
-  'retrieval': { name: 'Retrieval and RAG', blurb: 'Getting models to answer from the right evidence.' },
-  'retail-ecommerce': { name: 'Retail and ecommerce', blurb: 'DTC, retail, and what AI changes for them.' },
-  'operations': { name: 'Operations and supply chain', blurb: 'Fulfillment, logistics, and making systems work at scale.' },
-  'careers': { name: 'Careers and the field', blurb: 'Working in AI, and how the field is changing.' },
+  'ai-safety-governance': { name: 'AI safety and governance', blurb: 'Feral AI, agents, hijacking, and keeping AI inside its bounds.' },
+  'models-and-market': { name: 'Models and the market', blurb: 'The labs, the models, open vs. closed weights, and the bubble question.' },
+  'ai-explained': { name: 'AI explained', blurb: 'Closing the Loop, my newsletter on how AI actually works, one idea per issue.' },
+  'research-notes': { name: 'Research notes', blurb: 'Short reads on new AI papers and why they matter.' },
+  'work-and-careers': { name: 'Work and careers', blurb: 'Jobs, layoffs, leadership, and how AI is changing work.' },
+  'retail-ecommerce': { name: 'Retail and ecommerce', blurb: 'DTC, retail, and the companies I watch.' },
+  'economic-reporting': { name: 'Economic reporting', blurb: 'Fed surveys, jobs, inflation, sentiment, and my City Economic Health reports.' },
 } as const;
 
 export type TopicSlug = keyof typeof TOPICS;
