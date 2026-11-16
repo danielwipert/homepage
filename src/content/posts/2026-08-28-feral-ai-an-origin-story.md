@@ -5,6 +5,7 @@ topics: ['ai-safety-governance']
 excerpt: "I recently coined the term \"Feral AI\" to give a name to the trend of destructive and reckless behavior coming from the frontier labs in how they are handling their AI systems...."
 source: linkedin-article
 sourceUrl: "https://www.linkedin.com/pulse/feral-ai-origin-story-daniel-wipert-28m3c"
+featured: 2
 published: true
 ---
 I recently coined the term "Feral AI" to give a name to the trend of destructive and reckless behavior coming from the frontier labs in how they are handling their AI systems. The Hugging Face hack by OpenAI was really the inciting incident beyond my concept of Feral AI, which is both a warning about Gen AI agentic systems and the corporations that build them.

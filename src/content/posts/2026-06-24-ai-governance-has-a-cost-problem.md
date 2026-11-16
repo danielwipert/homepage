@@ -5,6 +5,7 @@ topics: ['ai-economics']
 excerpt: "ChatGPT felt like magic the first time you used it, and your manager said as much when she told you to start experimenting. Then it got better, and better again. The CEO issued..."
 source: linkedin-article
 sourceUrl: "https://www.linkedin.com/pulse/ai-governance-has-cost-problem-daniel-wipert-bfz7c"
+featured: 4
 published: true
 ---
 ChatGPT felt like magic the first time you used it, and your manager said as much when she told you to start experimenting. Then it got better, and better again. The CEO issued a directive: "Everyone use AI now!” Then a dozen pilots launched with blank checks. The company declared itself "AI First," whatever that meant. Budgets swelled so that no one would be caught falling behind. For two giddy years, from 2023 to 2025, much of the corporate world ran a fever.

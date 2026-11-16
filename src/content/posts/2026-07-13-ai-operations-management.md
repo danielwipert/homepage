@@ -2,9 +2,10 @@
 title: "AI Operations Management"
 date: 2026-07-13
 topics: ['ai-economics']
-excerpt: "The category error Enterprise software has long been managed on a defining economic assumption: that its marginal cost of use is effectively zero. Once licensed and installed,..."
+excerpt: "Enterprise software has long been managed on a defining economic assumption: that its marginal cost of use is effectively zero. Once licensed and installed, the hundredth use..."
 source: linkedin-article
 sourceUrl: "https://www.linkedin.com/pulse/ai-operations-management-daniel-wipert-aqsic"
+featured: 1
 published: true
 ---
 ### The category error

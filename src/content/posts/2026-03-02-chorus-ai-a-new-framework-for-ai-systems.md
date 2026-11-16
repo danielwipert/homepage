@@ -5,6 +5,7 @@ topics: ['building-reliable-ai']
 excerpt: "I've written before about the rise of Agentic AI. When I was studying alongside other business leaders at Kellogg School of Management, one thing stood out above everything..."
 source: linkedin-article
 sourceUrl: "https://www.linkedin.com/pulse/chorus-ai-new-framework-systems-daniel-wipert-rv9qf"
+featured: 3
 published: true
 ---
 I've written before about the rise of [Agentic AI](https://www.linkedin.com/pulse/liberating-agentic-ai-through-limitation-daniel-wipert-t6ice/?trackingId=fiMRoPQbSrCbzqRpUIuBsQ%3D%3D). When I was studying alongside other business leaders at [Kellogg School of Management](https://www.linkedin.com/school/kellogg-school-of-management/posts/?feedView=all), one thing stood out above everything else: we are barely scratching the surface of what AI can do, and the next great leap forward will be Agentic AI. Then I stepped away. Work got busy. I spent more time teaching. Creative pursuits pulled me away.

@@ -2,9 +2,10 @@
 title: "Start Here... What is AI, really?"
 date: 2026-05-26
 topics: ['ai-explained']
-excerpt: "What \"AI\" actually means, and why everyone means something different when they say it You're being asked to budget for AI, govern it, and bet your roadmap on it, all using a..."
+excerpt: "You're being asked to budget for AI, govern it, and bet your roadmap on it, all using a word that means something different to everyone at the table. That confusion is..."
 source: linkedin-article
 sourceUrl: "https://www.linkedin.com/pulse/start-here-what-ai-really-daniel-wipert-h7c1f"
+featured: 6
 published: true
 ---
 ### What "AI" actually means, and why everyone means something different when they say it

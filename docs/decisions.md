@@ -76,6 +76,7 @@ All decisions made on 2026-11-11, one gate at a time.
 | 48 | Final 9 topics: Building reliable AI, AI economics, AI safety and governance, Models and the market, AI explained, Research notes, Work and careers, Retail and ecommerce, Economic reporting | Matches what Dan actually wrote | `src/data/topics.ts` |
 | 49 | 306 published, 62 left as unpublished drafts (article announcements, certificates, very short posts, film, a 2016 ad, one duplicate) | Library stays substantive; drafts can be flipped on later | `src/content/posts/` |
 | 50 | Import fixes: LinkedIn's per-line quotes removed, "fancy" bold letters turned into plain text, duplicates matched by LinkedIn link | Clean text, readable by search engines and screen readers | `scripts/import_linkedin.py` |
+| 51 | "Start here" shelf: AI Operations Management, Feral AI: An Origin Story, Chorus AI framework, AI Governance Has a Cost Problem, Liberating Agentic AI Through Limitation, Start Here... What is AI, really? (2026-11-15) | Dan's big original ideas, lined up with the Work page | `featured:` in each post |
 
 ## Open items
 
@@ -84,5 +85,4 @@ All decisions made on 2026-11-11, one gate at a time.
 - Headshot photo for About (placeholder circle until then).
 - Review drafted case studies and About story.
 - Metro Economic Health Report repo link (if public).
-- Featured shelf picks (topics settled, see #48).
 - Typefaces, colors, card style, headshot treatment (mockup step).

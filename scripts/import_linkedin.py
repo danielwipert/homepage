@@ -187,6 +187,7 @@ def strip_tags(s: str) -> str:
 
 
 def excerpt_of(md: str, n: int = 180) -> str:
+    md = "\n".join(ln for ln in md.splitlines() if not ln.lstrip().startswith("#"))  # skip headings
     plain = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", md)
     plain = re.sub(r"[#*_>]", "", plain).replace("\n", " ")
     plain = re.sub(r"(^|\s)- ", r"\1", plain)
