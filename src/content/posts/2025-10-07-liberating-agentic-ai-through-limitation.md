@@ -2,7 +2,7 @@
 title: "Liberating Agentic AI Through Limitation"
 date: 2025-10-07
 topics: ['ai-safety-governance', 'building-reliable-ai']
-excerpt: "Layered Trust Architecture: A Framework for Agentic AI Governance If Agentic AI is inevitable, and I think it most definitely is, then we need to start building frameworks now...."
+excerpt: "If Agentic AI is inevitable, and I think it most definitely is, then we need to start building frameworks now..."
 source: linkedin-article
 sourceUrl: "https://www.linkedin.com/pulse/liberating-agentic-ai-through-limitation-daniel-wipert-t6ice"
 featured: 5
