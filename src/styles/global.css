@@ -2,25 +2,25 @@
    Light only ("Daylight"), on every device; dark mode removed Nov 2026. */
 
 :root {
-  --bg: #F5F3EE;
-  --surface: #FFFFFF;
-  --ink: #14161B;
-  --muted: #555B66;
-  --orange: #F26A2E;
-  --orange-hi: #FF8A52;
-  --orange-text: #B8461A;
-  --mustard: #F2B33D;
-  --teal: #1F8A80;
-  --dot: rgba(20, 22, 27, 0.07);
-  --panel: #1B1F27;
-  --mint: #DCEBE7;
+  --bg: #F2EEE5;
+  --surface: #FBF9F4;
+  --ink: #22201C;
+  --muted: #5E5A52;
+  --orange: #E06A33;
+  --orange-hi: #F08A58;
+  --orange-text: #A4471F;
+  --mustard: #CFA14E;
+  --teal: #3F7D76;
+  --dot: rgba(34, 32, 28, 0.06);
+  --panel: #2A2824;
+  --mint: #DDE3D5;
   --mint-ink: #14161B;
   --shadow: rgba(20, 22, 27, 0.14);
-  --phosphor: #FFB000;
-  --violet-a: #4A2A85;
-  --violet-b: #24124A;
+  --phosphor: #E6A94A;
+  --violet-a: #5A4A6E;
+  --violet-b: #3A2F4A;
   --violet-text: #F4EEFF;
-  --violet-label: #DCCDFF;
+  --violet-label: #E4DCEC;
 
   --font-display: 'Inter Tight', 'Inter', system-ui, sans-serif;
   --font-body: 'Newsreader', Georgia, serif;
@@ -52,6 +52,9 @@ h1, h2, h3 { font-family: var(--font-display); }
 .wrap { max-width: var(--wrap); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
 .mono { font-family: var(--font-mono); letter-spacing: 2px; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Muted "faded mid-century" palette (Nov 2026): softer card shadows site-wide. */
+.lift { box-shadow: 5px 5px 0 rgba(34, 32, 28, .85), 0 14px 24px rgba(0, 0, 0, .10) !important; }
 
 /* ---------- CRT screens ---------- */
 .crt { position: relative; overflow: hidden; }
