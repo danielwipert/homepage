@@ -1,27 +1,27 @@
 {
   "openrouter": {
-    "dataWeek": "2026-W46",
-    "weekLabel": "2026-W46",
-    "openShare": 0.7645,
+    "dataWeek": "2026-W47",
+    "weekLabel": "2026-W47",
+    "openShare": 0.8322,
     "topLab": {
-      "name": "DeepSeek",
-      "share": 0.4156
+      "name": "Tencent",
+      "share": 0.3859
     }
   },
   "metro": {
-    "asOf": "2026-11-16",
+    "asOf": "2026-11-23",
     "count": 50,
     "top": {
-      "city": "Salt Lake City",
-      "short": "SLC",
+      "city": "St. Louis",
+      "short": "STL",
       "score": 78,
       "grade": "A+"
     },
     "bottom": [
-      "Louisville",
-      "Chicago",
-      "Detroit"
+      "Denver",
+      "Richmond",
+      "Grand Rapids"
     ]
   },
-  "refreshedAt": "2026-11-16T23:45Z"
+  "refreshedAt": "2026-11-24T02:16Z"
 }
